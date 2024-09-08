@@ -7,7 +7,7 @@ const Navbar = () => {
   const user = useContext(UserContext)
   return (
     <div className="desktop-navbar-container">
-      <h1 className="desktop-navbar-logo">Blogger</h1>
+      <Link className="home-link" to='/'><h1 className="desktop-navbar-logo">Blogger</h1></Link>
       <div className="desktop-tabs-container">
         <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
           Profile
