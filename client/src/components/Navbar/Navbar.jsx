@@ -12,12 +12,14 @@ const Navbar = () => {
         <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
           Profile
         </Link>
-        <Link
+        {user!==null &&
+          <Link
           className="desktop-nav-write-link desktop-nav-link"
           to="/write"
         >
           Write
         </Link>
+        }
       </div>
       <div className='nav-btns-div'>
       {user==null &&
