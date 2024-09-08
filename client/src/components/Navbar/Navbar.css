@@ -1,0 +1,72 @@
+.desktop-navbar-container {
+    width: 100%;
+    min-height: 73px;
+    background-color: #304766;
+    padding: 0 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  
+  .desktop-navbar-logo {
+    width: 116px;
+    height: 44px;
+    font-family: Caveat;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    color: #ffffff;
+    padding: 0;
+    margin: auto 0;
+  }
+  
+  .desktop-tabs-container {
+    display: flex;
+    align-items: center;
+  }
+  .desktop-nav-link {
+    text-decoration: none;
+    color: #ffffff;
+  }
+  .desktop-nav-profile-link {
+    width: 47px;
+    height: 28px;
+    margin-right: 31px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0.10000000149011612px;
+    text-align: center;
+  }
+  
+  .desktop-nav-write-link {
+    width: 67px;
+    height: 28px;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: 0.20000000298023224px;
+    text-align: center;
+  }
+  
+  .nav-btns {
+    width: 73px;
+    height: 35px;
+    padding: 10px auto;
+    border-radius: 30px;
+    background-color: #ffffff;
+    border: none;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    color: #304766;
+    margin-left: 15px;
+  }
+
+  @media screen and (max-width: 900px) {
+    
+  }
