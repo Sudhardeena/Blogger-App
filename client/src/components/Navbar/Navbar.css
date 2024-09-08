@@ -7,11 +7,18 @@
     justify-content: space-between;
     align-items: center;
   }
+
+  @media screen and (max-width: 800px) {
+    .desktop-navbar-container{
+      padding: 0 10px;
+      min-height: 50px;
+    }
+  }
   
   
   .desktop-navbar-logo {
-    width: 116px;
-    height: 44px;
+    max-width: 116px;
+    max-height: 44px;
     font-family: Caveat;
     font-size: 32px;
     font-weight: 700;
@@ -20,41 +27,61 @@
     padding: 0;
     margin: auto 0;
   }
+
+  @media screen and (max-width: 800px) {
+    .desktop-navbar-logo{
+      font-size: 20px;
+    }
+  }
   
   .desktop-tabs-container {
     display: flex;
     align-items: center;
   }
+  @media screen and (max-width: 800px) {
+    
+  }
   .desktop-nav-link {
     text-decoration: none;
     color: #ffffff;
   }
+  
   .desktop-nav-profile-link {
-    width: 47px;
-    height: 28px;
+    margin: auto 0;
+    max-width: 47px;
+    max-height: 28px;
     margin-right: 31px;
     font-family: Inter;
     font-size: 16px;
     font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 0.10000000149011612px;
     text-align: center;
+    
+  }
+  @media screen and (max-width: 800px) {
+    .desktop-nav-profile-link{
+      font-size: 12px;
+    }
   }
   
   .desktop-nav-write-link {
-    width: 67px;
-    height: 28px;
+    margin: auto 0;
+    max-width: 67px;
+    max-height: 28px;
     font-family: Inter;
     font-size: 16px;
     font-weight: 400;
-    line-height: 28px;
-    letter-spacing: 0.20000000298023224px;
     text-align: center;
+  }
+  @media screen and (max-width: 800px) {
+    .desktop-nav-write-link{
+      font-size: 12px;
+    }
   }
   
   .nav-btns {
-    width: 73px;
-    height: 35px;
+    margin: auto 0;
+    max-width: 73px;
+    max-height: 35px;
     padding: 10px auto;
     border-radius: 30px;
     background-color: #ffffff;
@@ -67,6 +94,9 @@
     margin-left: 15px;
   }
 
-  @media screen and (max-width: 900px) {
-    
+  @media screen and (max-width: 800px) {
+    .nav-btns{
+      padding: 5px;
+      border-radius: 5px;
+    }
   }

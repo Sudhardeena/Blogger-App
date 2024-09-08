@@ -1,41 +1,46 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
+import { UserContext } from '../../context/userContext'
 
 const Navbar = () => {
+  const user = useContext(UserContext)
   return (
     <div className="desktop-navbar-container">
       <h1 className="desktop-navbar-logo">Blogger</h1>
       <div className="desktop-tabs-container">
-        <Link className="desktop-nav-profile-link desktop-nav-link" to="/">
+        <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
           Profile
         </Link>
         <Link
           className="desktop-nav-write-link desktop-nav-link"
-          to="/my-trips"
+          to="/write"
         >
           Write
         </Link>
       </div>
       <div className='nav-btns-div'>
-      <button
-        className="nav-btns"
-        type="button"
-      >
-        Login
-      </button>
-      <button
-        className="nav-btns"
-        type="button"
-      >
-        SignUp
-      </button>
-      <button
-        className="nav-btns"
-        type="button"
-      >
-        Logout
-      </button>
+      {user==null &&
+      <>
+        <Link className="desktop-nav-profile-link desktop-nav-link" to="/login">
+          Login
+        </Link>
+        <Link
+          className="desktop-nav-write-link desktop-nav-link"
+          to="/register"
+        >
+          SingUp
+        </Link>
+        </>
+      }
+      {user!==null && 
+        <button
+          className="nav-btns"
+          type="button"
+        >
+          Logout
+        </button>
+      }
       </div>
       
     </div>
