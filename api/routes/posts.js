@@ -1,11 +1,12 @@
 import express from "express";
+import { addPost } from "../controllers/post.js";
+
+
 
 const router = express.Router()
 
-router.get('/',(req,res)=>{
-    res.json("this is post")
-})
-    
 
+    
+router.get('/',addPost)
 
 export default router
