@@ -1,24 +1,34 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 import { UserContext } from '../../context/userContext'
 
 const Navbar = () => {
-  const user = useContext(UserContext)
+  const {user,setUser} = useContext(UserContext)
+  
+  const navigate = useNavigate()
+
+  const onClickLogout = () => {
+    setUser(null)
+  }
+
   return (
     <div className="desktop-navbar-container">
       <Link className="home-link" to='/'><h1 className="desktop-navbar-logo">Blogger</h1></Link>
       <div className="desktop-tabs-container">
-        <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
-          Profile
-        </Link>
+        
         {user!==null &&
+        <>
+          <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
+            Profile
+          </Link>
           <Link
           className="desktop-nav-write-link desktop-nav-link"
           to="/write"
         >
           Write
         </Link>
+        </>
         }
       </div>
       <div className='nav-btns-div'>
@@ -39,6 +49,7 @@ const Navbar = () => {
         <button
           className="nav-btns"
           type="button"
+          onClick={onClickLogout}
         >
           Logout
         </button>
