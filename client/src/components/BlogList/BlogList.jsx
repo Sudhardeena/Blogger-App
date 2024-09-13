@@ -6,11 +6,11 @@ const BlogList = (props) => {
     const {blogList} = props
   return (
     <ul className='blog-list'>
-        {blogList.map(each=><BlogItem key={each.id} blogDetails={each}/>)}
+        {blogList.map(each=><BlogItem key={each.blogId} blogDetails={each}/>)}
     </ul>
       
     
   )
 }
-
+ 
 export default BlogList

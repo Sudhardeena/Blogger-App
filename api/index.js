@@ -5,9 +5,10 @@ import sqlite3 from 'sqlite3'
 import path from 'path';
 import { fileURLToPath } from 'url';
 import bcrypt from 'bcrypt'
-import postRoutes from './routes/posts.js'
+// import postRoutes from './routes/posts.js'
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
+import blogRoutes from './routes/blogs.js'
 
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
@@ -40,5 +41,6 @@ intializeDBAndServer()
 
 app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
-app.use("/api/posts",postRoutes)
+// app.use("/api/posts",postRoutes)
+app.use("/api/blogs",blogRoutes)
 
