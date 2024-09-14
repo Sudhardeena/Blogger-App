@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import './Single.css'
 import Comments from '../../components/Comments/Comments'
 
@@ -53,6 +53,35 @@ const commentsList = [
 
 
 const Single = () => {
+  const [blog,setBlog] = useState({})
+
+  const params = useParams()
+  const {blogId} = params
+  // console.log(blogId)
+
+  const fetchData = async () =>{
+    try {
+      const url = `http://localhost:8000/api/blogs/${blogId}`
+      const options = {
+          method: 'GET',
+          headers: {
+          'Content-Type' : 'application/json'
+        },
+      }
+      const response = await fetch(url,options);
+      const data = await response.json()
+      console.log(data)
+      // setBlog(data)
+    } catch (error) {
+      // TypeError: Failed to fetch
+      console.log('There was an error', error);
+    }
+  }
+
+  useEffect(()=>fetchData,[])
+
+
+
   return (
     <div className='single-post-page-container'>
       <Navbar/>

@@ -7,7 +7,7 @@ const BlogItem = (props) => {
     console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
   return (
-    <Link to={`/post/${blogId}`}>
+    <Link to={`/blogs/${blogId}`}>
         <li className='blog-list-item'>
         <div className='blog-img-div'>
         <img className='blog-image' src="https://images.forbesindia.com/blog/wp-content/uploads/2024/09/C_shutterstock_2358722117_SM.jpg?impolicy=website&width=277&height=208" alt={title}/>

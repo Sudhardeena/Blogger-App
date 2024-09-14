@@ -22,7 +22,9 @@ export const getBlogs = async (req,res) => {
 }
 
 export const getBlog = (req,res) => {
-    res.json("from controller")
+    const {blogId} = req.params
+    console.log(blogId)
+    res.json(blogId)
 }
 
 export const addBlog = (req,res) => {
