@@ -11,6 +11,7 @@
 .blog-img-div{
     width: 100%;
     min-height: 300px;
+    max-height: 300px;
 }
 
 .blog-image{

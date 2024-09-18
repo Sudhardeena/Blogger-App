@@ -5,6 +5,7 @@ import 'react-quill/dist/quill.snow.css';
 import { UserContext } from '../../context/userContext';
 
 import './Write.css'
+import { useNavigate } from 'react-router-dom';
 
 const Write = () => {
   const [title, setTitle] = useState('');
@@ -15,9 +16,11 @@ const Write = () => {
 
   const {user} = useContext(UserContext)
   
+  const navigate = useNavigate()
   
 
   const handleSubmit = async () =>{
+
     
     if(title!=='' && description!=='' && content!=='' && blogImg!==null){
       
@@ -42,12 +45,13 @@ const Write = () => {
         }
         // console.log(options)
         const response = await fetch(url,options)
-        // const data = await response.json()
-        // console.log(data)
+        const data = await response.json()
+        
         if(response.ok){
-          // navigate('/login')
+          console.log(data)
+          navigate('/')
         }else{
-          // setErrorMessage(data)
+          console.log(`Error: ${data}`)
         }
         }else{
           alert("please fill all the fields and upload blog image too..")

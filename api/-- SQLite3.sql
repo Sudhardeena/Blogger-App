@@ -4,7 +4,8 @@ VALUES ("The Wonders of React","An in-depth look at how React revolutionizes fro
 
 select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date 
 from (blogs inner join users on users.user_id = blogs.user_id) AS A
-WHERE blogs.title LIKE '%%';
+WHERE blogs.title LIKE '%%'
+ORDER BY A.blog_date DESC;
 
 id: 1,
     title: "The Wonders of React",
@@ -16,8 +17,8 @@ id: 1,
 
     CREATE TABLE blogs (
     blog_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT,
+    title VARCHAR(255) NOT NULL,
+    description VARCHAR(300),
     content TEXT,
     blog_img TEXT,
     user_id INTEGER,
@@ -31,3 +32,7 @@ drop TABLE blogs;
 drop TABLE posts;
 
 SELECT * FROM blogs
+
+DELETE from blogs where blog_id=1;
+
+SELECT * FROM users;

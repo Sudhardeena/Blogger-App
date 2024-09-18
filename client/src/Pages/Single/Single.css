@@ -31,6 +31,11 @@
 }
 .single-blog-user-name{
     font-weight: bold;
+    font-size: 25px;
+}
+.single-blog-posted-time{
+    font-size: 20px;
+
 }
 .edit{
     display: flex;
@@ -57,11 +62,37 @@
     font-size: 40px;
     color: #333;
     margin-top: 20px;
+    margin-bottom: 0;
+    padding-bottom: 0;
     font-family: roboto;
 }
 
 .single-page-blog-entire-content{
     line-height: 30px;
+}
+.single-blog-content{
+    line-height: 30px;
+    font-size: 23px;
+    font-family: roboto;
+}
+.single-blog-content, *{
+    font-size: 23px;
+    font-family: roboto;
+}
+h3{
+    margin-top: 0;
+    font-size: 25px;
+}
+span{
+    font-size: 23px;
+    font-family: roboto;
+    line-height: 30px;
+}
+
+.single-blog-content, ul{
+    margin: 0;
+    padding: 10px;
+    
 }
 
 .comments-heading{

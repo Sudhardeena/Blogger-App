@@ -1,10 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import './Single.css'
 import Comments from '../../components/Comments/Comments'
 import moduleName from 'module'
 import { UserContext } from '../../context/userContext'
+import DOMPurify from "dompurify";
 
 const commentsList = [
   {
@@ -62,6 +63,8 @@ const Single = () => {
   // console.log(blogId)
 
   const {user} = useContext(UserContext)
+  
+  const navigate = useNavigate()
 
   const fetchData = async () =>{
     try {
@@ -75,7 +78,7 @@ const Single = () => {
       const response = await fetch(url,options);
       const data = await response.json()
       console.log(data)
-      // setBlog(data)
+      setBlog(data)
     } catch (error) {
       // TypeError: Failed to fetch
       console.log('There was an error', error);
@@ -84,52 +87,60 @@ const Single = () => {
 
   useEffect(()=>fetchData,[])
 
+  const onDeleteBlog = async () =>{
+    try {
+      const url = `http://localhost:8000/api/blogs/${blogId}`
+      const options = {
+          method: 'DELETE',
+          headers: {
+          'Content-Type' : 'application/json'
+        },
+      }
+      const response = await fetch(url,options);
+      const data = await response.json()
+      console.log(data)
+      if (response.ok){
+        const {userInformation} = user
+        const {userId} = userInformation
+        navigate(`/profile/${userId}`)
+      }
+    } catch (error) {
+      // TypeError: Failed to fetch
+      console.log('There was an error', error);
+    }
+  }
+
+  const getText = (html) =>{
+    const doc = new DOMParser().parseFromString(html, "text/html")
+    return doc.body.textContent
+  }
+
 
 
   return (
     <div className='single-post-page-container'>
       <Navbar/>
       <div className='blog-content'>
-        <img className='single-blog-page-image' src='../uploads/blogs/1726486917173.webp' alt='single-blog-page'/>
+        <img className='single-blog-page-image' src={`../uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src='https://images.forbesindia.com/blog/wp-content/uploads/2020/10/SM_Ranu-Vohra_IMG_1406.jpg?impolicy=website&width=253&height=169' alt='single-blog-user-img'/>
+          <img className='single-blog-user-img' src={`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
           <div className='single-blog-user-ingo'>
-            <span className='single-blog-user-name'>Jhon</span>
-            <p className='single-blog-posted-time'>posted 2 days ago</p>
+            <span className='single-blog-user-name'>{blog.username}</span>
+            <p className='single-blog-posted-time'>{blog.blogDate}</p>
           </div>
           {
             user!==null && 
           <div className='edit'>
-            <Link to='/write?edit=2' className="edit-delete-link">Edit</Link>
-            <Link to='' className='edit-delete-link'>Delete</Link>
+            <button to='/write?edit=2' className="edit-delete-link">Edit</button>
+            <button type='button' className='edit-delete-link' onClick={onDeleteBlog}>Delete</button>
           </div>
           }
         </div>
-        <h1 className='single-page-blog-title'>My First Blog</h1>
-        <p className='single-page-blog-entire-content'>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, nunc eu suscipit cursus, nulla lorem sodales turpis, ac dictum eros dolor et risus.
-        </p><br/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, nunc eu suscipit cursus, nulla lorem sodales turpis, ac dictum eros dolor et risus.
-        </p><br/>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in repLorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-          Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-          Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, nunc eu rehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.<br/>
-          Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, nunc eu suscipit cursus, nulla lorem sodales turpis, ac dictum eros dolor et risus.
-        </p>
-
-        </p>
+        <h1 className='single-page-blog-title'>{blog.title}</h1>
+        <div className='single-blog-content'
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blog.blogContent) }}
+        >
+        </div>
 
       </div>
       <h1 className='comments-heading'>Comments</h1>

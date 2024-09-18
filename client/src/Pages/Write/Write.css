@@ -15,6 +15,7 @@
 }
 .editor-container-content{
     width: 80%;
+
 }
 .title{
     width: 100%;
@@ -35,6 +36,7 @@
     
 }
 .editor{
+    min-height: 300px;
     height: 100%;
     border: none;
 }

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom'
 
 const BlogItem = (props) => {
     const {blogDetails} = props
-    console.log(blogDetails)
+    // console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
-    console.log(blogImg)
+    // console.log(blogImg)
   return (
     <Link to={`/blogs/${blogId}`}>
         <li className='blog-list-item'>

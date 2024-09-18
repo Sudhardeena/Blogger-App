@@ -20,7 +20,7 @@ const router = express.Router()
 router.get('/',getBlogs)
 router.get('/:blogId',getBlog)
 router.post('/',upload.single('blog_img'),addBlog)
-router.get('/:id',deleteBlog)
+router.delete('/:blogId',deleteBlog)
 router.get('/:id',updateBlog)
 
 export default router
