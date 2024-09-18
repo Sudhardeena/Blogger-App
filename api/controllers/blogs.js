@@ -28,8 +28,12 @@ export const getBlog = (req,res) => {
 }
 
 export const addBlog = (req,res) => {
-    res.json("from controller")
+    const {title, description, content,user_id} = req.body
+    const blog_img = req.file ? req.file.filename : null;
+    console.log(req.body)
+    console.log(blog_img)
 }
+
 
 export const deleteBlog = (req,res) => {
     res.json("from controller")

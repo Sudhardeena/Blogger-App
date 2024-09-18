@@ -6,11 +6,12 @@ const BlogItem = (props) => {
     const {blogDetails} = props
     console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
+    console.log(blogImg)
   return (
     <Link to={`/blogs/${blogId}`}>
         <li className='blog-list-item'>
         <div className='blog-img-div'>
-        <img className='blog-image' src="https://images.forbesindia.com/blog/wp-content/uploads/2024/09/C_shutterstock_2358722117_SM.jpg?impolicy=website&width=277&height=208" alt={title}/>
+        <img className='blog-image' src={`../uploads/blogs/${blogImg}`} alt={title}/>
         </div>
         <div className='blog-info-container'>
             <h1 className='blog-title'>{title}</h1>

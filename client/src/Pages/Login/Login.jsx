@@ -45,7 +45,7 @@ const Login = () => {
       // const {jwtToken,userInformation} = data
       setUser(data)
       navigate('/') 
-      // console.log(data)
+      console.log(data)
     }else{
       setErrorMessage(data)
     }
@@ -59,7 +59,7 @@ const Login = () => {
         
         <input required type='password' placeholder='password' name='password' onChange={handleChange}/>
         
-        <button type='submit'>Register</button>
+        <button type='submit'>Login</button>
         {errorMessage && <p className='login_error_mssg'>{errorMessage}</p>}
         <span>Don't you have an account? <Link className='register_link' to='/register'>Register</Link></span>
       </form>

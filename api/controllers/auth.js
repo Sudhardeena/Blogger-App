@@ -59,7 +59,7 @@ export const login = async (req,res) =>{
       res.json('Invalid password')
     } else if (isMatchedPassword === true) {
       const {user_id,username,email,profile_image} = selectedUser
-      const userInformation = {username,email,profile_image}
+      const userInformation = {userId:user_id,username,email,profileImage:profile_image}
       const payload = {user_id}
       const jwtToken = jwt.sign(payload, 'MY_SECRET_TOKEN')
       res.status(200)

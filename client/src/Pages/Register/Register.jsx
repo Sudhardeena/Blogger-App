@@ -59,8 +59,8 @@ const Register = () => {
         <input required type='text' placeholder='username' name='username' onChange={handleChange}/>
         <input required type='email' placeholder='email' name='email' onChange={handleChange}/>
         <input required type='password' placeholder='password' name='password' onChange={handleChange}/>
-        <label className='upload-image-label' htmlFor='userProfilePic'>   Upload Image</label>
-            <input className='editor-input-elements' type='file' name='' id='userProfilePic' onChange={handleFileChange}/>
+        <label className='upload-image-label' htmlFor='userProfilePicInput'>   Upload Image</label>
+            <input className='editor-input-elements' type='file' name='' id='userProfilePicInput' onChange={handleFileChange}/>
         <button type='submit'>Register</button>
         {errorMessage && <p className='login_error_mssg'>{inputs.errorMessage}</p>}
         <span>Do you have an account? <Link className='register_link' to='/login'>Login</Link></span>

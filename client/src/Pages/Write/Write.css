@@ -24,6 +24,12 @@
     padding: 10px;
     border: 1px solid lightgray;
 }
+.description-input{
+    width: 100%;
+    height: 20%;
+    margin: 10px 0;
+    max-height: 100px;
+}
 .editor-container{
     height: 300px;
     

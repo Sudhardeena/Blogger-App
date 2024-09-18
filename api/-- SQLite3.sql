@@ -29,3 +29,5 @@ id: 1,
 drop TABLE blogs;
 
 drop TABLE posts;
+
+SELECT * FROM blogs

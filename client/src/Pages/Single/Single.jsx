@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import { Link, useParams } from 'react-router-dom'
 import './Single.css'
 import Comments from '../../components/Comments/Comments'
+import moduleName from 'module'
+import { UserContext } from '../../context/userContext'
 
 const commentsList = [
   {
@@ -59,6 +61,8 @@ const Single = () => {
   const {blogId} = params
   // console.log(blogId)
 
+  const {user} = useContext(UserContext)
+
   const fetchData = async () =>{
     try {
       const url = `http://localhost:8000/api/blogs/${blogId}`
@@ -86,17 +90,20 @@ const Single = () => {
     <div className='single-post-page-container'>
       <Navbar/>
       <div className='blog-content'>
-        <img className='single-blog-page-image' src='https://images.forbesindia.com/blog/wp-content/uploads/2024/09/C_shutterstock_2358722117_SM.jpg?impolicy=website&width=277&height=208' alt='single-blog-page'/>
+        <img className='single-blog-page-image' src='../uploads/blogs/1726486917173.webp' alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
           <img className='single-blog-user-img' src='https://images.forbesindia.com/blog/wp-content/uploads/2020/10/SM_Ranu-Vohra_IMG_1406.jpg?impolicy=website&width=253&height=169' alt='single-blog-user-img'/>
           <div className='single-blog-user-ingo'>
             <span className='single-blog-user-name'>Jhon</span>
             <p className='single-blog-posted-time'>posted 2 days ago</p>
           </div>
+          {
+            user!==null && 
           <div className='edit'>
             <Link to='/write?edit=2' className="edit-delete-link">Edit</Link>
             <Link to='' className='edit-delete-link'>Delete</Link>
           </div>
+          }
         </div>
         <h1 className='single-page-blog-title'>My First Blog</h1>
         <p className='single-page-blog-entire-content'>
