@@ -16,6 +16,11 @@
     max-height: 400px;
     object-fit: cover;
 }
+.single-user-info-profile-info-link{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
 .single-blog-user-img{
     width: 50px;
     height: 50px;
@@ -89,6 +94,10 @@ span{
     line-height: 30px;
 }
 
+img{
+    width: 100%;
+}
+
 .single-blog-content, ul{
     margin: 0;
     padding: 10px;
@@ -99,4 +108,32 @@ span{
     margin-top: 15px;
     color: #304766;
     font-size: 30px;
+}
+
+@media screen and (max-width:499px) {
+    .single-page-blog-title{
+        font-size: 20px;
+        margin: 0
+    }
+    .single-blog-content{
+        font-size: 15px;
+    }
+    .single-blog-posted-time{
+        font-size: 13px;
+    }
+    .edit-delete-link{
+        width: 50px;
+        height: 20px;
+        padding-top: 5px;
+        border-radius: 5px;
+        font-size: 10px;
+        font-weight: 600;
+        text-align: center;
+        margin-right: 7px;   
+    }
+    p, span{
+        font-size: 20px;
+        line-height: 1.5;
+    }
+    
 }

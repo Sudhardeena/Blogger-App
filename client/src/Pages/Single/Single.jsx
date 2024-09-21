@@ -62,6 +62,8 @@ const Single = () => {
   const {blogId} = params
   // console.log(blogId)
 
+  console.log(blog)
+
   const {user} = useContext(UserContext)
   
   const navigate = useNavigate()
@@ -123,15 +125,17 @@ const Single = () => {
       <div className='blog-content'>
         <img className='single-blog-page-image' src={`../uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src={`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
-          <div className='single-blog-user-ingo'>
-            <span className='single-blog-user-name'>{blog.username}</span>
-            <p className='single-blog-posted-time'>{blog.blogDate}</p>
-          </div>
+          <Link className='single-user-info-profile-info-link' to={`/profile/${blog.authorId}`}>
+            <img className='single-blog-user-img' src={`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
+            <div className='single-blog-user-ingo'>
+              <span className='single-blog-user-name'>{blog.authorname}</span>
+              <p className='single-blog-posted-time'>{blog.blogDate}</p>
+            </div>
+          </Link>
           {
-            user!==null && 
+            (user!==null && user.userInformation.userId==blog.authorId) && 
           <div className='edit'>
-            <button to='/write?edit=2' className="edit-delete-link">Edit</button>
+            <Link to={`/write?edit=${blog.blogId}`} state={blog} className="edit-delete-link">Edit</Link>
             <button type='button' className='edit-delete-link' onClick={onDeleteBlog}>Delete</button>
           </div>
           }

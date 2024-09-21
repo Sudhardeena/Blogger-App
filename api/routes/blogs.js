@@ -21,6 +21,6 @@ router.get('/',getBlogs)
 router.get('/:blogId',getBlog)
 router.post('/',upload.single('blog_img'),addBlog)
 router.delete('/:blogId',deleteBlog)
-router.get('/:id',updateBlog)
+router.put('/:blogId',upload.single('blog_img'),updateBlog)
 
 export default router

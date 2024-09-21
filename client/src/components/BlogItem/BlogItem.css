@@ -10,7 +10,6 @@
 
 .blog-img-div{
     width: 100%;
-    min-height: 300px;
     max-height: 300px;
 }
 
@@ -55,5 +54,21 @@
     }
     .blog-img-div{
         width: 50%;
+    }
+}
+
+@media screen and (max-width:499px) {
+    .blog-title{
+        font-size: 20px;
+    }
+    .bolg-desc{
+        font-size: 15px;
+    }
+    .username-and-date{
+        font-size: 10px;
+        margin: 5px 0;
+    }
+    .blog-title{
+        margin: 5px 0;
     }
 }

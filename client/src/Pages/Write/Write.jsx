@@ -5,12 +5,13 @@ import 'react-quill/dist/quill.snow.css';
 import { UserContext } from '../../context/userContext';
 
 import './Write.css'
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Write = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [content, setContent] = useState('');
+  const state = useLocation().state
+  const [title, setTitle] = useState(state?.title || '');
+  const [description, setDescription] = useState(state?.description || '');
+  const [content, setContent] = useState(state?.blogContent || '');
   const [blogImg, setblogImg] = useState(null);
   // console.log(content)
 
@@ -22,8 +23,13 @@ const Write = () => {
   const handleSubmit = async () =>{
 
     
-    if(title!=='' && description!=='' && content!=='' && blogImg!==null){
-      
+    if(title!=='' && description!=='' && content!==''){
+      if(!state){
+        if(blogImg==null){
+          return alert("please fill all the fields and upload blog image too..")
+        }
+      }
+      console.log(title)
         const {userInformation,jwtToken} = user
         const {userId} = userInformation
       
@@ -38,9 +44,9 @@ const Write = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = "http://localhost:8000/api/blogs"
+        const url = state ? `http://localhost:8000/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
         const options = {
-          method: "POST",
+          method: state ? "PUT" : "POST",
           body: formDataToSend,
         }
         // console.log(options)
@@ -49,7 +55,7 @@ const Write = () => {
         
         if(response.ok){
           console.log(data)
-          navigate('/')
+          navigate(state ? `/blogs/${state.blogId}` : '/')
         }else{
           console.log(`Error: ${data}`)
         }
@@ -73,7 +79,7 @@ const Write = () => {
         </div>
         <div className='menu'>
           <div className='menu-item'>
-            <h1 className='publish-tittle'>Publish</h1>
+            <h1 className='publish-title'>Publish</h1>
             <span style={{textAlign:'left'}}>
               <b>Status:  </b> Draft
             </span>
@@ -85,7 +91,7 @@ const Write = () => {
             
             <div className='menu-btns'>
               <button className='each-menu-btn'>Save as a draft</button>
-              <button className='each-menu-btn' onClick={handleSubmit}>Publish</button>
+              <button className='each-menu-btn' onClick={handleSubmit}>{state ? 'Update' : "Publish"}</button>
             </div>
           </div>
           

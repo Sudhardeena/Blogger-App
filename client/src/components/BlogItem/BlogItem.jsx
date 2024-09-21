@@ -16,7 +16,7 @@ const BlogItem = (props) => {
         <div className='blog-info-container'>
             <h1 className='blog-title'>{title}</h1>
             <p className='username-and-date'><span className='blog-user-name'>{username}</span>    {blogDate}</p>
-            <p className='bolg-desc'>{desc}</p>
+            <p className='bolg-desc'>{desc.slice(0,100)}....</p>
         </div>
     </li>
     </Link>

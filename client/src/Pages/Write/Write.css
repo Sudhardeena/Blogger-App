@@ -32,8 +32,8 @@
     max-height: 100px;
 }
 .editor-container{
-    height: 300px;
-    
+    height: 400px;
+    max-height: 700px;       
 }
 .editor{
     min-height: 300px;
@@ -59,6 +59,17 @@
     .menu{
         width: 100%;
     }
+    .menu-item{
+        margin-top: 15px;
+    }
+    .editor-container-content{
+        margin-bottom: 35px;
+    }
+    .publish-title{
+        margin-bottom: 0;
+        margin-top: 5px;
+    }
+    
 }
 
 .menu-item{
@@ -87,4 +98,13 @@
     margin-right: 15px;
     text-decoration: none;
     color: #ffffff;
+}
+
+@media screen and (max-width:499px) {
+    
+    
+    input, textarea{
+        font-size: 20px;
+    }
+    
 }

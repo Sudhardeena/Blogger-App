@@ -28,7 +28,7 @@ export const getBlog = async (req,res) => {
     // console.log(blogId)
     // res.json(blogId)
     const getSingleBlogQuery = `
-        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date,A.profile_image,A.content
+        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date,A.profile_image,A.content,blogs.user_id
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
         WHERE blogs.blog_id = ?;
     `
@@ -38,12 +38,14 @@ export const getBlog = async (req,res) => {
             blogDate:dbResponse.blog_date,
             blogId: dbResponse.blog_id,
             blogImg: dbResponse.blog_img,
-            desc: dbResponse.description,
+            description: dbResponse.description,
             title: dbResponse.title,
-            username: dbResponse.username,
+            authorId: dbResponse.user_id,
+            authorname: dbResponse.username,
             authorImg: dbResponse.profile_image,
             blogContent: dbResponse.content
         }
+        // console.log(singleBlogData)
         res.status(200).json(singleBlogData);
     } catch (error) {
         console.error('Database error:', error);
@@ -54,8 +56,8 @@ export const getBlog = async (req,res) => {
 
 
 export const addBlog = async (req, res) => {
-    const { title, description, user_id } = req.body;
-    const content = req.body.content; // No need to modify content here
+    const { title, description, user_id, content } = req.body;
+    // const content = req.body.content; // No need to modify content here
     const blog_img = req.file ? req.file.filename : null;
 
     // Use parameterized queries to prevent SQL injection
@@ -91,6 +93,33 @@ export const deleteBlog =async (req,res) => {
     }
 }
 
-export const updateBlog = (req,res) => {
-    res.json("from controller")
+export const updateBlog =async (req,res) => {
+    const {blogId} = req.params
+    const { title, description, user_id, content } = req.body;
+    // const content = req.body.content; // No need to modify content here
+    const blog_img = req.file ? req.file.filename : null;
+
+    // Use parameterized queries to prevent SQL injection
+    const updateBlogQuery = blog_img==null ?
+    `
+        UPDATE blogs
+        SET title = ?,description =?,content = ?,user_id = ?
+        WHERE blog_id = ?;
+    `
+    :
+    `
+        UPDATE blogs
+        SET title = ?,description =?,content = ?,blog_img = ?,user_id = ?
+        WHERE blog_id = ?;
+    `
+
+    try {
+        const dbResponse = await db.run(updateBlogQuery, blog_img==null? 
+            [title, description, content,user_id,blogId]
+            :[title, description, content, blog_img, user_id,blogId]);
+        res.status(200).json("Blog Updated Successfully");
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'An error occurred while updating the blog.' });
+    }
 }
