@@ -29,7 +29,7 @@ const Write = () => {
           return alert("please fill all the fields and upload blog image too..")
         }
       }
-      console.log(title)
+      // console.log(title)
         const {userInformation,jwtToken} = user
         const {userId} = userInformation
       
@@ -54,7 +54,7 @@ const Write = () => {
         const data = await response.json()
         
         if(response.ok){
-          console.log(data)
+          // console.log(data)
           navigate(state ? `/blogs/${state.blogId}` : '/')
         }else{
           console.log(`Error: ${data}`)

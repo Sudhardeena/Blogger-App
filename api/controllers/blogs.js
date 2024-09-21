@@ -5,7 +5,7 @@ export const getBlogs = async (req,res) => {
     const {searc_q} = req.query;
     // console.log(searc_q)
     const getBlogsQuery = `
-        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date
+        select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
         WHERE blogs.title LIKE '%${searc_q}%'
         ORDER BY A.blog_date DESC;
@@ -28,12 +28,28 @@ export const getBlog = async (req,res) => {
     // console.log(blogId)
     // res.json(blogId)
     const getSingleBlogQuery = `
-        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date,A.profile_image,A.content,blogs.user_id
+        select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date,A.profile_image,A.content,blogs.user_id
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
         WHERE blogs.blog_id = ?;
     `
+    const getCommentsQuery = `
+        SELECT A.comment,datetime(A.comment_date, 'localtime') AS comment_date,A.username,A.profile_image,A.user_id,A.comment_id FROM (comments INNER join users on comments.user_id = users.user_id) as A
+        WHERE A.blog_id = ?
+        ORDER BY A.comment_date DESC;
+    `
     try {
         const dbResponse = await db.get(getSingleBlogQuery, [blogId]);
+        const commentList = await db.all(getCommentsQuery,[blogId])
+        // console.log(commentList)
+        const modifiedCommentList = commentList.map(each=>({
+            comment:each.comment,
+            commentDate: each.comment_date,
+            username: each.username,
+            profileImg: each.profile_image,
+            userId: each.user_id,
+            commentID: each.comment_id
+        }))
+        // console.log(modifiedCommentList)
         let singleBlogData = {
             blogDate:dbResponse.blog_date,
             blogId: dbResponse.blog_id,
@@ -43,7 +59,8 @@ export const getBlog = async (req,res) => {
             authorId: dbResponse.user_id,
             authorname: dbResponse.username,
             authorImg: dbResponse.profile_image,
-            blogContent: dbResponse.content
+            blogContent: dbResponse.content,
+            commentsList: modifiedCommentList
         }
         // console.log(singleBlogData)
         res.status(200).json(singleBlogData);

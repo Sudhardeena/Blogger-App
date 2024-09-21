@@ -71,4 +71,7 @@
     .blog-title{
         margin: 5px 0;
     }
+    .blog-image{
+        max-height: 220px;
+    }
 }

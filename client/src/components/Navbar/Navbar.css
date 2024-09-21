@@ -10,7 +10,7 @@
 
   @media screen and (max-width: 800px) {
     .desktop-navbar-container{
-      padding: 0 10px;
+      padding: 0 15px;
       min-height: 50px;
     }
   }

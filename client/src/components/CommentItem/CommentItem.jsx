@@ -1,17 +1,18 @@
 import React from 'react'
 import './CommentItem.css'
+import moment from 'moment'
 
 const CommentItem = (props) => {
     const {commentDetails} =props
-    const {comment_id,blog_id,comment,user_name,date} = commentDetails
+    const {comment,username,commentDate,profileImg} = commentDetails
     
   return (
     <li className='comment-item'>
       <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src='https://images.forbesindia.com/blog/wp-content/uploads/2020/10/SM_Ranu-Vohra_IMG_1406.jpg?impolicy=website&width=253&height=169' alt='single-blog-user-img'/>
+          <img className='single-blog-user-img' src={`../uploads/users/${profileImg}`}/>
           <div className='single-blog-user-ingo'>
-            <span className='single-blog-user-name'>Jhon</span>
-            <p className='single-blog-posted-time'>posted 2 days ago</p>
+            <span className='single-blog-user-name'>{username}</span>
+            <p className='single-blog-posted-time'>{moment(commentDate).fromNow()}</p>
           </div>
         </div>
         <p className='comment'>{comment}</p>

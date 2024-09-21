@@ -1,6 +1,7 @@
 import React from 'react'
 import './BlogItem.css'
 import { Link } from 'react-router-dom'
+import moment from 'moment'
 
 const BlogItem = (props) => {
     const {blogDetails} = props
@@ -15,7 +16,7 @@ const BlogItem = (props) => {
         </div>
         <div className='blog-info-container'>
             <h1 className='blog-title'>{title}</h1>
-            <p className='username-and-date'><span className='blog-user-name'>{username}</span>    {blogDate}</p>
+            <p className='username-and-date'><span className='blog-user-name'>{username}</span>    {moment(blogDate).fromNow()}</p>
             <p className='bolg-desc'>{desc.slice(0,100)}....</p>
         </div>
     </li>

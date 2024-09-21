@@ -45,7 +45,7 @@ const Login = () => {
       // const {jwtToken,userInformation} = data
       setUser(data)
       navigate('/') 
-      console.log(data)
+      // console.log(data)
     }else{
       setErrorMessage(data)
     }

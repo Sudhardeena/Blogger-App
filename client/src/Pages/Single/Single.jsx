@@ -6,6 +6,7 @@ import Comments from '../../components/Comments/Comments'
 import moduleName from 'module'
 import { UserContext } from '../../context/userContext'
 import DOMPurify from "dompurify";
+import moment from 'moment'
 
 const commentsList = [
   {
@@ -62,7 +63,7 @@ const Single = () => {
   const {blogId} = params
   // console.log(blogId)
 
-  console.log(blog)
+  // console.log(blog)
 
   const {user} = useContext(UserContext)
   
@@ -79,7 +80,7 @@ const Single = () => {
       }
       const response = await fetch(url,options);
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       setBlog(data)
     } catch (error) {
       // TypeError: Failed to fetch
@@ -100,7 +101,7 @@ const Single = () => {
       }
       const response = await fetch(url,options);
       const data = await response.json()
-      console.log(data)
+      // console.log(data)
       if (response.ok){
         const {userInformation} = user
         const {userId} = userInformation
@@ -129,7 +130,7 @@ const Single = () => {
             <img className='single-blog-user-img' src={`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
             <div className='single-blog-user-ingo'>
               <span className='single-blog-user-name'>{blog.authorname}</span>
-              <p className='single-blog-posted-time'>{blog.blogDate}</p>
+              <p className='single-blog-posted-time'>{moment(blog.blogDate).fromNow()}</p>
             </div>
           </Link>
           {
@@ -148,7 +149,7 @@ const Single = () => {
 
       </div>
       <h1 className='comments-heading'>Comments</h1>
-      <Comments commentslist={commentsList}/>
+      {blog.commentsList && <Comments commentslist={blog.commentsList}/>}
     </div>
   )
 }

@@ -2,10 +2,15 @@
     width: 80%;
     min-height: 100%;
 }
+@media screen and (max-width:768px) {
+    .single-post-page-container{
+      width: 100%;
+    }
+  }
 
 .blog-content{
     width: 100%;
-    padding-top: 10px;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     gap: 30px;
@@ -95,7 +100,7 @@ span{
 }
 
 img{
-    width: 100%;
+    max-width: 100%;
 }
 
 .single-blog-content, ul{
@@ -123,8 +128,8 @@ img{
     }
     .edit-delete-link{
         width: 50px;
-        height: 20px;
-        padding-top: 5px;
+        height: 23px;
+        padding : auto;
         border-radius: 5px;
         font-size: 10px;
         font-weight: 600;

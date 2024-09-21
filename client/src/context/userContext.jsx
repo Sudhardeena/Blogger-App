@@ -5,7 +5,7 @@ export  const UserContext = createContext()
 const UserContextProvider = (props) =>{
     const [user,setUser] = useState(null) 
 
-    console.log(user)
+    // console.log(user)
 
     return (
         <UserContext.Provider value={{user,setUser}}>

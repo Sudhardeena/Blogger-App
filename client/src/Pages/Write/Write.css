@@ -2,6 +2,11 @@
     width: 80%;
     min-height: 100%;
 }
+@media screen and (max-width:768px) {
+    .write-post-page-container{
+      width: 100%;
+    }
+  }
 .write-page-content{
     width: 100%;
     height: 100%;
