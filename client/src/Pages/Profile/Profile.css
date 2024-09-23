@@ -24,10 +24,14 @@
     width: 25%;
     display: flex;
     flex-direction: column;
-    gap: 20px;
     padding: 0 10px;
     padding-top: 20px;
     flex-shrink: 0;
+}
+@media screen and (max-width:600px) {
+    .user-profile-details-section{
+        width: 100%;
+    }
 }
 
 .profile-user-name{
@@ -38,3 +42,48 @@
     
 }
 
+.contact-heading{
+    font-size: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    color: #304766;
+}
+.mail-id{
+    margin: 0;
+}
+.loader{
+    width: 100%;
+    text-align: center;
+    font-size: 100px;
+
+  }
+.user-edit-form{
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+
+.edit-user-btn, .update-user-btn{
+    border-radius: 5px;
+    background-color: #304766;
+    border: none;
+    padding: 8px 10px;
+    font-family: Inter;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    margin-top: 10px;
+    width: 100px;
+}
+.update-user-btn{
+    margin-top: 0;
+}
+
+.edit-username-input, .edit-email-input, .edit-user-img-input{
+    padding: 10px;
+    border: 1px solid lightgray;
+    width: 100%;
+}

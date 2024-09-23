@@ -4,6 +4,8 @@ import BlogList from '../../components/BlogList/BlogList'
 import './Profile.css'
 import { UserContext } from '../../context/userContext'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { BsThreeDots } from 'react-icons/bs'
+
 
 // const blogList = [
 //     {
@@ -57,16 +59,38 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 //   ];
 
 const Profile = () => {
+  const {userId} = useParams()
   const {user} = useContext(UserContext)
-
   const [userDetailsAndBlogs,setDetailsAndBlog] = useState({})
+  const [isLoading,setApiStatus] = useState(false)
+  const [isEditing,setIsEditing] = useState(false)
+  const [editUsername,setEditUsername] = useState('')
+  const [editEmail,setEditEmail] = useState('')
+  const [editUserImg,setEditUserImg] = useState(null)
+
+  if(userDetailsAndBlogs.userDetails){
+    var {username,profileImage,email} = userDetailsAndBlogs.userDetails
+  }
+
+  const onChangeEditUsername = e =>{
+    setEditUsername(e.target.value)
+  }
+  const onChangeEditEmail = e =>{
+    setEditEmail(e.target.value)
+  }
+
+  const onChangeEditUserImg = e =>{
+    setEditUserImg(e.target.files[0])
+  }
   
 
-  const params = useParams()
-  const {userId} = params
+  
+
+  // console.log(userId)
 
   const fetchData = async () =>{
     try {
+      setApiStatus(true)
       const url = `http://localhost:8000/api/users/blogs/${userId}`
       const options = {
           method: 'GET',
@@ -76,8 +100,15 @@ const Profile = () => {
       }
       const response = await fetch(url,options);
       const data = await response.json()
+      const {userDetails} = data
+      const {username,email} = userDetails
+      console.log(userId)
       console.log(data) 
       setDetailsAndBlog(data)
+      setApiStatus(false)
+      setEditUsername(username)
+      setEditEmail(email)
+
     } catch (error) {
       // TypeError: Failed to fetch
       console.log('There was an error', error);
@@ -85,25 +116,112 @@ const Profile = () => {
   }
 
 
-  useEffect(()=>fetchData,[])
+  useEffect(()=>{fetchData()},[userId])
+
+  const onSetEditing = () =>{
+    setIsEditing(prev=>(!prev))
+  }
+
+  const handleSubmit = async () =>{
+      // console.log(title)
+        const {userInformation,jwtToken} = user
+        const {userId} = userInformation
+      
+
+        const formDataToSend = new FormData();
+        formDataToSend.append('username', editUsername);
+        formDataToSend.append('email', editEmail);
+        formDataToSend.append('user_id',userId);
+        if (blogImg) {
+          formDataToSend.append('blog_img', blogImg);
+        }
+        // formDataToSend.append('profileImage', inputs.profileImage);
+
+        const url = state ? `http://localhost:8000/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
+        const options = {
+          method: state ? "PUT" : "POST",
+          body: formDataToSend,
+        }
+        // console.log(options)
+        const response = await fetch(url,options)
+        const data = await response.json()
+        
+        if(response.ok){
+          // console.log(data)
+          navigate(state ? `/blogs/${state.blogId}` : '/',{replace:true})
+        }else{
+          console.log(`Error: ${data}`)
+        }
+        
+  }
+
+  
 
 
   return (
     <div className='profile-page-container'>
       <Navbar/>
-      <div className='profile-page-content'>
+      {isLoading ? 
+      <BsThreeDots
+      className='loader'
+        visible={true}
+        color="#304766"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />:
+        <div className='profile-page-content'>
         
         <div className='user-profile-details-section'>
         <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src='https://images.forbesindia.com/blog/wp-content/uploads/2020/10/SM_Ranu-Vohra_IMG_1406.jpg?impolicy=website&width=253&height=169' alt='single-blog-user-img'/>
+          <img className='single-blog-user-img' src={`../uploads/users/${profileImage}`} alt='single-blog-user-img'/>
           <div className='single-blog-user-ingo'>
-            <span className='profile-user-name'>Jhon</span>
-            
+            <span className='profile-user-name'>{username}</span>
           </div>
         </div>
+        <h1 className='contact-heading'>Contact :</h1>
+        <p className='mail-id'>{email}</p>
+        {(user!==null && user.userInformation.userId==userId)
+        &&
+        <button type='text'
+         className='edit-user-btn'
+         onClick={onSetEditing}
+         >{isEditing?"Cancel":"Edit User"}</button>
+        }
+        
+        {isEditing && 
+          <form className='user-edit-form' onSubmit={handleSubmit}>
+            <input className='edit-username-input'
+            required
+            type='text'
+            placeholder='username'
+            value={editUsername}
+            name='setEditUsername'
+            onChange={onChangeEditUsername}
+            ></input>
+            <input className='edit-email-input'
+            required
+            type='email'
+            placeholder='email'
+            value={editEmail}
+            onChange={onChangeEditEmail}
+            ></input>
+            <input className='edit-user-img-input'
+            type='file'
+            placeholder='User Image'
+            onChange={onChangeEditUserImg}
+            ></input>
+            <button className='update-user-btn'
+              type='submit'
+            >Update User</button>
+          </form>
+        }
         </div>
         {userDetailsAndBlogs.userBlogsList && <BlogList className="profile-blog-list" blogList={userDetailsAndBlogs.userBlogsList}/>}
       </div>
+  }
+      
     </div>
   )
 }

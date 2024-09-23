@@ -18,7 +18,7 @@ export const getUserBlogs = async (req,res) => {
         // console.log(userDetails)
         const blogList = await db.all(getBlogsQuery,[userId])
         const modifieduserDetails = {
-            userID : userDetails.user_id,
+            userId : userDetails.user_id,
             username : userDetails.username,
             email : userDetails.email,
             profileImage : userDetails.profile_image,

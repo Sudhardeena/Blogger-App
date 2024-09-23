@@ -7,6 +7,12 @@
     height: 100%;
 }
 
+.no-blogs-list{
+    font-size: 40px;
+    margin: auto;
+    text-align: center;
+}
+
 @media screen and (min-width: 600px) {
     .blog-list{
         padding: 0;

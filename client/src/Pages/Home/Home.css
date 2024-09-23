@@ -36,3 +36,9 @@
     width: 20px;
     height: 20px;
   }
+
+  .loader{
+    margin-top: 300px;
+    margin-left: auto;
+    font-size: 100px;
+  }

@@ -7,51 +7,52 @@ import moduleName from 'module'
 import { UserContext } from '../../context/userContext'
 import DOMPurify from "dompurify";
 import moment from 'moment'
+import { BsThreeDots } from 'react-icons/bs'
 
-const commentsList = [
-  {
-    comment_id: 1,
-    blog_id: 101,
-    comment: "Great article! I found the section on React hooks particularly insightful.",
-    user_name: "Alice",
-    date: "2024-09-01T10:30:00Z"
-  },
-  {
-    comment_id: 2,
-    blog_id: 102,
-    comment: "I disagree with the conclusion. I think there's more to consider about state management.",
-    user_name: "Bob",
-    date: "2024-09-02T12:45:00Z"
-  },
-  {
-    comment_id: 3,
-    blog_id: 103,
-    comment: "Very informative! The examples were clear and easy to follow.",
-    user_name: "Charlie",
-    date: "2024-09-03T14:00:00Z"
-  },
-  {
-    comment_id: 4,
-    blog_id: 101,
-    comment: "Can you provide more details on the performance implications?",
-    user_name: "Diana",
-    date: "2024-09-04T16:30:00Z"
-  },
-  {
-    comment_id: 5,
-    blog_id: 104,
-    comment: "I enjoyed reading this. The explanation of closures was particularly well done.",
-    user_name: "Eve",
-    date: "2024-09-05T09:15:00Z"
-  },
-  {
-    comment_id: 6,
-    blog_id: 105,
-    comment: "I think there's a typo in the example code. Can you please review it?",
-    user_name: "Frank",
-    date: "2024-09-06T11:00:00Z"
-  }
-];
+// const commentsList = [
+//   {
+//     comment_id: 1,
+//     blog_id: 101,
+//     comment: "Great article! I found the section on React hooks particularly insightful.",
+//     user_name: "Alice",
+//     date: "2024-09-01T10:30:00Z"
+//   },
+//   {
+//     comment_id: 2,
+//     blog_id: 102,
+//     comment: "I disagree with the conclusion. I think there's more to consider about state management.",
+//     user_name: "Bob",
+//     date: "2024-09-02T12:45:00Z"
+//   },
+//   {
+//     comment_id: 3,
+//     blog_id: 103,
+//     comment: "Very informative! The examples were clear and easy to follow.",
+//     user_name: "Charlie",
+//     date: "2024-09-03T14:00:00Z"
+//   },
+//   {
+//     comment_id: 4,
+//     blog_id: 101,
+//     comment: "Can you provide more details on the performance implications?",
+//     user_name: "Diana",
+//     date: "2024-09-04T16:30:00Z"
+//   },
+//   {
+//     comment_id: 5,
+//     blog_id: 104,
+//     comment: "I enjoyed reading this. The explanation of closures was particularly well done.",
+//     user_name: "Eve",
+//     date: "2024-09-05T09:15:00Z"
+//   },
+//   {
+//     comment_id: 6,
+//     blog_id: 105,
+//     comment: "I think there's a typo in the example code. Can you please review it?",
+//     user_name: "Frank",
+//     date: "2024-09-06T11:00:00Z"
+//   }
+// ];
 
 
 
@@ -59,6 +60,7 @@ const commentsList = [
 const Single = () => {
   const [blog,setBlog] = useState({})
   const [commentInput,setCommentInput] = useState('')
+  const [isLoading,setApiStatus] = useState(false)
 
   const params = useParams()
   const {blogId} = params
@@ -71,6 +73,7 @@ const Single = () => {
   const navigate = useNavigate()
 
   const fetchData = async () =>{
+    setApiStatus(true)
     try {
       const url = `http://localhost:8000/api/blogs/${blogId}`
       const options = {
@@ -83,13 +86,14 @@ const Single = () => {
       const data = await response.json()
       // console.log(data)
       setBlog(data)
+      setApiStatus(false)
     } catch (error) {
       // TypeError: Failed to fetch
       console.log('There was an error', error);
     }
   }
 
-  useEffect(()=>fetchData,[])
+  useEffect(()=>{fetchData()},[])
 
   const onDeleteBlog = async () =>{
     try {
@@ -114,10 +118,10 @@ const Single = () => {
     }
   }
 
-  const getText = (html) =>{
-    const doc = new DOMParser().parseFromString(html, "text/html")
-    return doc.body.textContent
-  }
+  // const getText = (html) =>{
+  //   const doc = new DOMParser().parseFromString(html, "text/html")
+  //   return doc.body.textContent
+  // }
 
   const onAddComment = async () =>{
     if(commentInput.length==0){
@@ -153,7 +157,21 @@ const Single = () => {
   return (
     <div className='single-post-page-container'>
       <Navbar/>
-      <div className='blog-content'>
+      {isLoading ?
+        <BsThreeDots
+        className="loader"
+        visible={true}
+        height="120"
+        width="120"
+        color="#304766"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />
+        :
+        <>
+        <div className='blog-content'>
         <img className='single-blog-page-image' src={`../uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
           <Link className='single-user-info-profile-info-link' to={`/profile/${blog.authorId}`}>
@@ -195,6 +213,9 @@ const Single = () => {
             >Add</button>
         </>
       }
+        </>
+      }
+      
     </div>
   )
 }

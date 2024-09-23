@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import BlogList from '../../components/BlogList/BlogList';
 import {BsSearch} from 'react-icons/bs'
+import { BsThreeDots } from 'react-icons/bs'
 import './Home.css'
 
 
@@ -61,9 +62,8 @@ import './Home.css'
 
 const Home = () => {
   const [blogs,setBlogs] = useState([])
-
-
   const [searchInput,setSearchInput] = useState('')
+  const [isLoading,setApiStatus] = useState(false)
   
   
 
@@ -84,6 +84,7 @@ const Home = () => {
 
   const fetchData = async () =>{
     try {
+      setApiStatus(true)
       const url = `http://localhost:8000/api/blogs?searc_q=${searchInput}`
       const options = {
           method: 'GET',
@@ -94,6 +95,7 @@ const Home = () => {
       const response = await fetch(url,options);
       const data = await response.json()
       // console.log(data)
+      setApiStatus(false)
       setBlogs(data)
     } catch (error) {
       // TypeError: Failed to fetch
@@ -101,11 +103,25 @@ const Home = () => {
     }
   }
 
-  useEffect(()=>fetchData,[])
+  useEffect(()=>{fetchData()},[])
 
   return (
     <div className='home-page-container'>
       <Navbar/>
+      {isLoading?
+        <BsThreeDots
+        className="loader"
+        visible={true}
+        height="120"
+        width="120"
+        color="#304766"
+        radius="9"
+        ariaLabel="three-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        />
+      :
+      <>
       <div className="search-input-container">
         <input
           value={searchInput}
@@ -117,6 +133,8 @@ const Home = () => {
         <BsSearch className="search-icon" onClick={onSearch} />
       </div>
       <BlogList blogList={blogs}/>
+      </>
+      }
     </div>
   )
 }
