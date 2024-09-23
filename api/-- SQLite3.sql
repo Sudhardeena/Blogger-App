@@ -149,3 +149,9 @@ SELECT * FROM comments
 DELETE FROM comments
 
 SELECT CURRENT_TIMESTAMP;
+
+
+select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date
+        from (blogs inner join users on users.user_id = blogs.user_id) AS A
+        WHERE A.user_id = 2
+        ORDER BY A.blog_date DESC;

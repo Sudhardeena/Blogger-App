@@ -13,11 +13,15 @@ const Navbar = () => {
     navigate('/',{replace:true})
   }
 
+  
+
+  const userId = user!==null ? user.userInformation.userId : null
+
   return (
     <div className="desktop-navbar-container">
       <Link className="home-link" to='/'><h1 className="desktop-navbar-logo">Blogger</h1></Link>
       <div className="desktop-tabs-container">
-        <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
+        <Link className="desktop-nav-profile-link desktop-nav-link" to={user!==null ? `/profile/${userId}` : "/login"}>
           Profile
         </Link>
         <Link

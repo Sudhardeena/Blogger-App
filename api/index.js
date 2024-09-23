@@ -4,8 +4,6 @@ import { open } from "sqlite"
 import sqlite3 from 'sqlite3'
 import path from 'path';
 import { fileURLToPath } from 'url';
-import bcrypt from 'bcrypt'
-// import postRoutes from './routes/posts.js'
 import authRoutes from './routes/auth.js'
 import userRoutes from './routes/users.js'
 import blogRoutes from './routes/blogs.js'
@@ -41,6 +39,5 @@ intializeDBAndServer()
 
 app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
-// app.use("/api/posts",postRoutes)
 app.use("/api/blogs",blogRoutes)
 

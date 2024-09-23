@@ -10,17 +10,23 @@ export const getBlogs = async (req,res) => {
         WHERE blogs.title LIKE '%${searc_q}%'
         ORDER BY A.blog_date DESC;
     `
-    let blogList = await db.all(getBlogsQuery)
-    blogList =  blogList.map(each => ({
-        blogDate:each.blog_date,
-        blogId: each.blog_id,
-        blogImg: each.blog_img,
-        desc: each.description,
-        title: each.title,
-        username: each.username
-    }))
-    // console.log(blogList)
-    res.json(blogList)  
+    
+    try {
+        const blogList = await db.all(getBlogsQuery)
+        const modifiedBlogList =  blogList.map(each => ({
+            blogDate:each.blog_date,
+            blogId: each.blog_id,
+            blogImg: each.blog_img,
+            desc: each.description,
+            title: each.title,
+            username: each.username
+        }))
+        // console.log(blogList)
+        res.status(200).json(modifiedBlogList) 
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'An error occurred while getting the blog list.' });
+    } 
 }
 
 export const getBlog = async (req,res) => {
@@ -171,3 +177,4 @@ export const addComment = async (req,res)=>{
     }
 
 }
+
