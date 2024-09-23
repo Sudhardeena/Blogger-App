@@ -44,7 +44,7 @@ const Login = () => {
     if(response.ok){
       // const {jwtToken,userInformation} = data
       setUser(data)
-      navigate('/') 
+      navigate('/',{replace:true}) 
       // console.log(data)
     }else{
       setErrorMessage(data)

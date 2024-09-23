@@ -9,7 +9,7 @@ const CommentItem = (props) => {
   return (
     <li className='comment-item'>
       <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src={`../uploads/users/${profileImg}`}/>
+          <img className='single-blog-user-img' src={profileImg=='null' ?'../uploads/users/Unknown_person.jpg':`../uploads/users/${profileImg}`}/>
           <div className='single-blog-user-ingo'>
             <span className='single-blog-user-name'>{username}</span>
             <p className='single-blog-posted-time'>{moment(commentDate).fromNow()}</p>

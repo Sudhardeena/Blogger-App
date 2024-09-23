@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import BlogList from '../../components/BlogList/BlogList'
 import './Profile.css'
+import { UserContext } from '../../context/userContext'
+import { Navigate, useNavigate } from 'react-router-dom'
 
 const blogList = [
     {
@@ -55,6 +57,12 @@ const blogList = [
   ];
 
 const Profile = () => {
+  const {user} = useContext(UserContext)
+  if(user==null){
+    return <Navigate to="/login" replace={true} />
+  }
+
+
   return (
     <div className='profile-page-container'>
       <Navbar/>

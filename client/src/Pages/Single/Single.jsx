@@ -58,6 +58,7 @@ const commentsList = [
 
 const Single = () => {
   const [blog,setBlog] = useState({})
+  const [commentInput,setCommentInput] = useState('')
 
   const params = useParams()
   const {blogId} = params
@@ -118,6 +119,35 @@ const Single = () => {
     return doc.body.textContent
   }
 
+  const onAddComment = async () =>{
+    if(commentInput.length==0){
+      return alert("add some text")
+    }
+    const {userInformation} = user
+    const {userId} = userInformation
+    const addCommentDetails = {
+      comment: commentInput,
+      user_id: userId,
+      blog_id: blogId
+    }
+    try {
+      const url = "http://localhost:8000/api/blogs/comments"
+      const options = {
+        method : "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body : JSON.stringify(addCommentDetails)
+      }
+      const response = await fetch(url,options)
+      const data = await response.json()
+      setBlog(prevBlogDetails=>({...prevBlogDetails,commentsList:data}))
+      setCommentInput('')
+    } catch (error) {
+      console.log('There is an error',error)
+    }
+  }
+
 
 
   return (
@@ -127,7 +157,7 @@ const Single = () => {
         <img className='single-blog-page-image' src={`../uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
           <Link className='single-user-info-profile-info-link' to={`/profile/${blog.authorId}`}>
-            <img className='single-blog-user-img' src={`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
+            <img className='single-blog-user-img' src={blog.authorImg=='null' ? '../uploads/users/Unknown_person.jpg':`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
             <div className='single-blog-user-ingo'>
               <span className='single-blog-user-name'>{blog.authorname}</span>
               <p className='single-blog-posted-time'>{moment(blog.blogDate).fromNow()}</p>
@@ -150,6 +180,21 @@ const Single = () => {
       </div>
       <h1 className='comments-heading'>Comments</h1>
       {blog.commentsList && <Comments commentslist={blog.commentsList}/>}
+      {user && 
+        <>
+          <textarea 
+            className='add-comment-textarea' 
+            placeholder='add comments' 
+            value={commentInput} 
+            onChange={e=>setCommentInput(e.target.value)}
+          />
+          <button 
+            type='button' 
+            className='add-comments-btn'
+            onClick={onAddComment}
+            >Add</button>
+        </>
+      }
     </div>
   )
 }

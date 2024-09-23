@@ -1,7 +1,7 @@
 import express from "express";
 import multer from "multer";
 import path from 'path';
-import { addBlog, deleteBlog, getBlog, getBlogs, updateBlog } from "../controllers/blogs.js";
+import { addBlog, addComment, deleteBlog, getBlog, getBlogs, updateBlog } from "../controllers/blogs.js";
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -22,5 +22,6 @@ router.get('/:blogId',getBlog)
 router.post('/',upload.single('blog_img'),addBlog)
 router.delete('/:blogId',deleteBlog)
 router.put('/:blogId',upload.single('blog_img'),updateBlog)
+router.post('/comments',addComment)
 
 export default router

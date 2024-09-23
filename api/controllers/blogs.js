@@ -140,3 +140,34 @@ export const updateBlog =async (req,res) => {
         res.status(500).json({ error: 'An error occurred while updating the blog.' });
     }
 }
+
+export const addComment = async (req,res)=>{
+    const {comment,user_id,blog_id} = req.body
+    
+    const addCommentQuery = `
+        INSERT INTO comments (comment, blog_id, user_id)
+        VALUES (?, ?, ?)
+    `;
+    const getCommentsQuery = `
+        SELECT A.comment,datetime(A.comment_date, 'localtime') AS comment_date,A.username,A.profile_image,A.user_id,A.comment_id FROM (comments INNER join users on comments.user_id = users.user_id) as A
+        WHERE A.blog_id = ?
+        ORDER BY A.comment_date DESC;
+    `
+    try {
+        const addCommentDbResponse = await db.run(addCommentQuery,[comment,blog_id,user_id])
+        const updatedCommentsList = await db.all(getCommentsQuery,[blog_id])
+        const modifiedCommentList = updatedCommentsList.map(each=>({
+            comment:each.comment,
+            commentDate: each.comment_date,
+            username: each.username,
+            profileImg: each.profile_image,
+            userId: each.user_id,
+            commentID: each.comment_id
+        }))
+        res.status(200).json(modifiedCommentList)
+    } catch (error) {
+        console.error('Database error:', error);
+        res.status(500).json({ error: 'An error occurred while adding the comment.' });
+    }
+
+}

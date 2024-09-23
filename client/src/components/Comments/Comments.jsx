@@ -10,11 +10,13 @@ const Comments = (props) => {
     
 
   return (
-    commentslist.length>0 ? 
+    
     <ul className='comments-list'>
-      {commentslist.map(each=><CommentItem key={each.comment_id}  commentDetails={each}/>)}
+      {
+        commentslist.length>0 ? 
+        commentslist.map(each=><CommentItem key={each.comment_id}  commentDetails={each}/>)
+    : <p className='no-comments-text'>no comments yet</p>}
     </ul>
-    : <p>no comments</p>
   )
 }
 

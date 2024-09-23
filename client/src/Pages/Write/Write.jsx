@@ -5,9 +5,17 @@ import 'react-quill/dist/quill.snow.css';
 import { UserContext } from '../../context/userContext';
 
 import './Write.css'
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate,  Navigate } from 'react-router-dom';
 
 const Write = () => {
+  const {user} = useContext(UserContext)
+  const navigate = useNavigate()
+
+  if(user==null){
+    return <Navigate to="/login" replace={true}/>
+  }
+
+
   const state = useLocation().state
   const [title, setTitle] = useState(state?.title || '');
   const [description, setDescription] = useState(state?.description || '');
@@ -15,9 +23,7 @@ const Write = () => {
   const [blogImg, setblogImg] = useState(null);
   // console.log(content)
 
-  const {user} = useContext(UserContext)
   
-  const navigate = useNavigate()
   
 
   const handleSubmit = async () =>{
@@ -55,7 +61,7 @@ const Write = () => {
         
         if(response.ok){
           // console.log(data)
-          navigate(state ? `/blogs/${state.blogId}` : '/')
+          navigate(state ? `/blogs/${state.blogId}` : '/',{replace:true})
         }else{
           console.log(`Error: ${data}`)
         }
@@ -63,7 +69,6 @@ const Write = () => {
           alert("please fill all the fields and upload blog image too..")
         }
   }
-
 
 
   return (

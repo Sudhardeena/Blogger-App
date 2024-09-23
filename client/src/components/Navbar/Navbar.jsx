@@ -10,26 +10,22 @@ const Navbar = () => {
 
   const onClickLogout = () => {
     setUser(null)
+    navigate('/',{replace:true})
   }
 
   return (
     <div className="desktop-navbar-container">
       <Link className="home-link" to='/'><h1 className="desktop-navbar-logo">Blogger</h1></Link>
       <div className="desktop-tabs-container">
-        
-        {user!==null &&
-        <>
-          <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
-            Profile
-          </Link>
-          <Link
+        <Link className="desktop-nav-profile-link desktop-nav-link" to="/profile/2">
+          Profile
+        </Link>
+        <Link
           className="desktop-nav-write-link desktop-nav-link"
           to="/write"
         >
           Write
         </Link>
-        </>
-        }
       </div>
       <div className='nav-btns-div'>
       {user==null &&
