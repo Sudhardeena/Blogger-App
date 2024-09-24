@@ -68,14 +68,13 @@ const Single = () => {
 
   // console.log(blog)
 
-  const {user} = useContext(UserContext)
+  const {user,setUser} = useContext(UserContext)
   
   const navigate = useNavigate()
 
   const fetchData = async () =>{
     setApiStatus(true)
-    try {
-      const url = `http://localhost:8000/api/blogs/${blogId}`
+    const url = `http://localhost:8000/api/blogs/${blogId}`
       const options = {
           method: 'GET',
           headers: {
@@ -85,22 +84,26 @@ const Single = () => {
       const response = await fetch(url,options);
       const data = await response.json()
       // console.log(data)
+    if(response.ok) { 
       setBlog(data)
       setApiStatus(false)
-    } catch (error) {
+    } else{
       // TypeError: Failed to fetch
-      console.log('There was an error', error);
+      console.log('There was an error', data);
     }
   }
 
   useEffect(()=>{fetchData()},[])
 
   const onDeleteBlog = async () =>{
-    try {
-      const url = `http://localhost:8000/api/blogs/${blogId}`
+    const {userInformation,jwtToken} = user
+    const {userId} = userInformation
+    
+    const url = `http://localhost:8000/api/blogs/${blogId}`
       const options = {
           method: 'DELETE',
           headers: {
+          Authorization: `Bearer ${jwtToken}`,
           'Content-Type' : 'application/json'
         },
       }
@@ -108,14 +111,16 @@ const Single = () => {
       const data = await response.json()
       // console.log(data)
       if (response.ok){
-        const {userInformation} = user
-        const {userId} = userInformation
         navigate(`/profile/${userId}`)
+      }else{
+        console.log(`Error: ${data}`)
+        if(response.status===401){
+          alert("Your session has expired please login again to delete your Blog")
+          setUser(null)
+        }
       }
-    } catch (error) {
-      // TypeError: Failed to fetch
-      console.log('There was an error', error);
-    }
+      
+    
   }
 
   // const getText = (html) =>{
@@ -127,29 +132,38 @@ const Single = () => {
     if(commentInput.length==0){
       return alert("add some text")
     }
-    const {userInformation} = user
+    const {userInformation,jwtToken} = user
     const {userId} = userInformation
     const addCommentDetails = {
       comment: commentInput,
       user_id: userId,
       blog_id: blogId
     }
-    try {
+    
       const url = "http://localhost:8000/api/blogs/comments"
       const options = {
         method : "POST",
         headers: {
+          Authorization: `Bearer ${jwtToken}`,
           'Content-Type': 'application/json'
         },
         body : JSON.stringify(addCommentDetails)
       }
       const response = await fetch(url,options)
       const data = await response.json()
-      setBlog(prevBlogDetails=>({...prevBlogDetails,commentsList:data}))
-      setCommentInput('')
-    } catch (error) {
-      console.log('There is an error',error)
-    }
+      if(response.ok){
+        setBlog(prevBlogDetails=>({...prevBlogDetails,commentsList:data}))
+        setCommentInput('')
+      }else{
+        console.log(`Error: ${data}`)
+        if(response.status===401){
+          alert("Your session has expired please login again to add your Comment")
+          setUser(null)
+        }
+      }
+    
+          
+    
   }
 
 
@@ -160,14 +174,10 @@ const Single = () => {
       {isLoading ?
         <BsThreeDots
         className="loader"
-        visible={true}
         height="120"
         width="120"
         color="#304766"
         radius="9"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
         />
         :
         <>

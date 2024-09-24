@@ -60,7 +60,8 @@ import { BsThreeDots } from 'react-icons/bs'
 
 const Profile = () => {
   const {userId} = useParams()
-  const {user} = useContext(UserContext)
+  const {user,setUser} = useContext(UserContext)
+  const navigate = useNavigate()
   const [userDetailsAndBlogs,setDetailsAndBlog] = useState({})
   const [isLoading,setApiStatus] = useState(false)
   const [isEditing,setIsEditing] = useState(false)
@@ -102,8 +103,8 @@ const Profile = () => {
       const data = await response.json()
       const {userDetails} = data
       const {username,email} = userDetails
-      console.log(userId)
-      console.log(data) 
+      // console.log(userId)
+      // console.log(data) 
       setDetailsAndBlog(data)
       setApiStatus(false)
       setEditUsername(username)
@@ -122,8 +123,9 @@ const Profile = () => {
     setIsEditing(prev=>(!prev))
   }
 
-  const handleSubmit = async () =>{
+  const handleSubmit = async e =>{
       // console.log(title)
+      e.preventDefault()
         const {userInformation,jwtToken} = user
         const {userId} = userInformation
       
@@ -131,26 +133,34 @@ const Profile = () => {
         const formDataToSend = new FormData();
         formDataToSend.append('username', editUsername);
         formDataToSend.append('email', editEmail);
-        formDataToSend.append('user_id',userId);
-        if (blogImg) {
-          formDataToSend.append('blog_img', blogImg);
+        if (editUserImg) {
+          formDataToSend.append('profileImage', editUserImg);
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = state ? `http://localhost:8000/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
+        const url = `http://localhost:8000/api/users/${userId}` 
         const options = {
-          method: state ? "PUT" : "POST",
+          headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
+          method:  "PUT",
           body: formDataToSend,
         }
         // console.log(options)
         const response = await fetch(url,options)
         const data = await response.json()
-        
+        // console.log(data)
         if(response.ok){
           // console.log(data)
-          navigate(state ? `/blogs/${state.blogId}` : '/',{replace:true})
+          setDetailsAndBlog(data)
+          onSetEditing()
         }else{
           console.log(`Error: ${data}`)
+          if(response.status===401){
+            alert("Your session expired please login again to Edit your User Details")
+            setUser(null)
+            onSetEditing()
+          }
         }
         
   }
@@ -163,13 +173,9 @@ const Profile = () => {
       <Navbar/>
       {isLoading ? 
       <BsThreeDots
-      className='loader'
-        visible={true}
+        className='loader'
         color="#304766"
         radius="9"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
         />:
         <div className='profile-page-content'>
         

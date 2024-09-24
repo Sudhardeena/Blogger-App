@@ -8,7 +8,7 @@ import './Write.css'
 import { useLocation, useNavigate,  Navigate } from 'react-router-dom';
 
 const Write = () => {
-  const {user} = useContext(UserContext)
+  const {user,setUser} = useContext(UserContext)
   const navigate = useNavigate()
 
   if(user==null){
@@ -52,6 +52,9 @@ const Write = () => {
 
         const url = state ? `http://localhost:8000/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
         const options = {
+          headers: {
+          Authorization: `Bearer ${jwtToken}`,
+        },
           method: state ? "PUT" : "POST",
           body: formDataToSend,
         }
@@ -64,6 +67,11 @@ const Write = () => {
           navigate(state ? `/blogs/${state.blogId}` : '/',{replace:true})
         }else{
           console.log(`Error: ${data}`)
+          if(response.status===401){
+            alert("Your session expired please login again to write your Blog")
+            setUser(null)
+            navigate('/login')
+          }
         }
         }else{
           alert("please fill all the fields and upload blog image too..")

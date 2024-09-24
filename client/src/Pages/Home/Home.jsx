@@ -69,13 +69,6 @@ const Home = () => {
 
   const onChangeSearchInput = (e) => {
     setSearchInput(e.target.value)
-    // let lowerCase = e.target.value
-    // lowerCase = lowerCase.toLocaleLowerCase()
-    // const res = blogList.filter(each=>{
-    //   const smallcaseTitle = each.title.toLocaleLowerCase()
-    //   return smallcaseTitle.includes(lowerCase)
-    // })
-    // setBlogs(res)
   }
 
   const onSearch = () => fetchData()
@@ -111,14 +104,10 @@ const Home = () => {
       {isLoading?
         <BsThreeDots
         className="loader"
-        visible={true}
         height="120"
         width="120"
         color="#304766"
         radius="9"
-        ariaLabel="three-dots-loading"
-        wrapperStyle={{}}
-        wrapperClass=""
         />
       :
       <>
