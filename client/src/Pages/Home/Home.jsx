@@ -81,7 +81,8 @@ const Home = () => {
       const options = {
           method: 'GET',
           headers: {
-          'Content-Type' : 'application/json'
+          'Content-Type' : 'application/json',
+          'Access-Control-Allow-Origin':'https://blogger-app-backend.vercel.app',
         },
       }
       const response = await fetch(url,options);
