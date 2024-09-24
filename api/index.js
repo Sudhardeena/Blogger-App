@@ -38,6 +38,10 @@ const intializeDBAndServer = async () => {
 
 intializeDBAndServer()
 
+app.get('/',(req,res)=>{
+  res.send("Hai")
+})
+
 app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
 app.use("/api/blogs",blogRoutes)
