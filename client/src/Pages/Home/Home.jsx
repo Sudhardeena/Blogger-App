@@ -92,6 +92,8 @@ const Home = () => {
       setBlogs(data)
     } catch (error) {
       // TypeError: Failed to fetch
+      console.log(response)
+      console.log(data)
       console.log('There was an error', error);
     }
   }
