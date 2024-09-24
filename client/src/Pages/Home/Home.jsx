@@ -76,8 +76,7 @@ const Home = () => {
   // console.log(searchInput)
 
   const fetchData = async () =>{
-    try {
-      setApiStatus(true)
+    setApiStatus(true)
       const url = `https://blogger-app-backend.vercel.app/api/blogs?search_q=${searchInput}`
       const options = {
           method: 'GET',
@@ -87,14 +86,14 @@ const Home = () => {
       }
       const response = await fetch(url,options);
       const data = await response.json()
+    if(response.ok) {
       // console.log(data)
       setApiStatus(false)
       setBlogs(data)
-    } catch (error) {
+    } else{
       // TypeError: Failed to fetch
       console.log(response)
-      console.log(data)
-      console.log('There was an error', error);
+      console.log('There was an error', data);
     }
   }
 
