@@ -17,6 +17,7 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
+const port = process.env.PORT || 8000
 
 export let db = null
 const intializeDBAndServer = async () => {
@@ -26,8 +27,8 @@ const intializeDBAndServer = async () => {
       driver: sqlite3.Database,
     })
     db.run('PRAGMA foreign_keys=ON;')
-    app.listen(8000, () => {
-      console.log('server running at http://localhost:8000')
+    app.listen(port, () => {
+      console.log(`server running at http://localhost:${port}`)
     })
   } catch (e) {
     console.log(`DB Error: ${e.message}`)
