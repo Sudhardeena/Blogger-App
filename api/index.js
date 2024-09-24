@@ -11,9 +11,15 @@ import blogRoutes from './routes/blogs.js'
 const __filename = fileURLToPath(import.meta.url); // get the resolved path to the file
 const __dirname = path.dirname(__filename); // get the name of the directory
 
-export const app = express()
+const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: 'https://blogger-app-five.vercel.app', // Allow your frontend domain
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+  allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
+}));
+
+
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
 
@@ -46,3 +52,4 @@ app.use("/api/auth",authRoutes)
 app.use("/api/users",userRoutes)
 app.use("/api/blogs",blogRoutes)
 
+export default app
