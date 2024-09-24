@@ -13,14 +13,14 @@ const __dirname = path.dirname(__filename); // get the name of the directory
 
 const app = express()
 
-app.use(cors({
-  origin: 'https://blogger-app-five.vercel.app', // Allow your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
-}));
+// app.use(cors({
+//   origin: 'https://blogger-app-five.vercel.app', // Allow your frontend domain
+//   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+//   allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
+// }));
 
-// Enabling preflight requests for all routes
-app.options('*', cors());
+// // Enabling preflight requests for all routes
+// app.options('*', cors());
 
 
 app.use(express.json())
