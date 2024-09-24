@@ -44,6 +44,9 @@ const intializeDBAndServer = async () => {
 
 intializeDBAndServer()
 
+app.options('*', cors()); // Preflight request handling for all routes
+
+
 app.get('/',(req,res)=>{
   res.send("Hai")
 })
