@@ -15,8 +15,8 @@ const app = express()
 
 app.use(cors({
   origin: 'https://blogger-app-five.vercel.app', // Allow your frontend domain
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
-  allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
+  // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // Specify allowed methods
+  // allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
 }));
 
 
@@ -44,7 +44,7 @@ const intializeDBAndServer = async () => {
 
 intializeDBAndServer()
 
-app.options('*', cors()); // Preflight request handling for all routes
+// app.options('*', cors()); // Preflight request handling for all routes
 
 
 app.get('/',(req,res)=>{
