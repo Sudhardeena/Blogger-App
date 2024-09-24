@@ -50,7 +50,7 @@ const Write = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = state ? `http://localhost:8000/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
+        const url = state ? `https://blogger-app-backend.vercel.app/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
         const options = {
           headers: {
           Authorization: `Bearer ${jwtToken}`,

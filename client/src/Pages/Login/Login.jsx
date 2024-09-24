@@ -29,7 +29,7 @@ const Login = () => {
     
     
 
-    const url = "http://localhost:8000/api/auth/login"
+    const url = "https://blogger-app-backend.vercel.app/api/auth/login"
     const options = {
       method: "POST",
       headers: {

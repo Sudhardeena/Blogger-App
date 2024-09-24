@@ -36,7 +36,7 @@ const Register = () => {
     }
     // formDataToSend.append('profileImage', inputs.profileImage);
 
-    const url = "http://localhost:8000/api/auth/register"
+    const url = "https://blogger-app-backend.vercel.app/api/auth/register"
     const options = {
       method: "POST",
       body: formDataToSend,

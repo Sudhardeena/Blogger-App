@@ -92,7 +92,7 @@ const Profile = () => {
   const fetchData = async () =>{
     try {
       setApiStatus(true)
-      const url = `http://localhost:8000/api/users/blogs/${userId}`
+      const url = `https://blogger-app-backend.vercel.app/api/users/blogs/${userId}`
       const options = {
           method: 'GET',
           headers: {
@@ -138,7 +138,7 @@ const Profile = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = `http://localhost:8000/api/users/${userId}` 
+        const url = `https://blogger-app-backend.vercel.app/api/users/${userId}` 
         const options = {
           headers: {
           Authorization: `Bearer ${jwtToken}`,

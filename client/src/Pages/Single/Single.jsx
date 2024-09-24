@@ -74,7 +74,7 @@ const Single = () => {
 
   const fetchData = async () =>{
     setApiStatus(true)
-    const url = `http://localhost:8000/api/blogs/${blogId}`
+    const url = `https://blogger-app-backend.vercel.app/api/blogs/${blogId}`
       const options = {
           method: 'GET',
           headers: {
@@ -99,7 +99,7 @@ const Single = () => {
     const {userInformation,jwtToken} = user
     const {userId} = userInformation
     
-    const url = `http://localhost:8000/api/blogs/${blogId}`
+    const url = `https://blogger-app-backend.vercel.app/api/blogs/${blogId}`
       const options = {
           method: 'DELETE',
           headers: {
@@ -140,7 +140,7 @@ const Single = () => {
       blog_id: blogId
     }
     
-      const url = "http://localhost:8000/api/blogs/comments"
+      const url = "https://blogger-app-backend.vercel.app/api/blogs/comments"
       const options = {
         method : "POST",
         headers: {
