@@ -26,8 +26,8 @@ const intializeDBAndServer = async () => {
       driver: sqlite3.Database,
     })
     db.run('PRAGMA foreign_keys=ON;')
-    app.listen("https://blogger-app-backend.vercel.app/", () => {
-      console.log('server running at https://blogger-app-backend.vercel.app/')
+    app.listen(8000, () => {
+      console.log('server running at http://localhost:8000')
     })
   } catch (e) {
     console.log(`DB Error: ${e.message}`)
