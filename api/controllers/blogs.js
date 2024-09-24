@@ -2,12 +2,12 @@
 import { db } from "../index.js";
 
 export const getBlogs = async (req,res) => {
-    const {searc_q} = req.query;
+    const {search_q} = req.query;
     // console.log(searc_q)
     const getBlogsQuery = `
         select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
-        WHERE blogs.title LIKE '%${searc_q}%'
+        WHERE blogs.title LIKE '%${search_q}%'
         ORDER BY A.blog_date DESC;
     `
     

@@ -78,7 +78,7 @@ const Home = () => {
   const fetchData = async () =>{
     try {
       setApiStatus(true)
-      const url = `https://blogger-app-backend.vercel.app/api/blogs?searc_q=${searchInput}`
+      const url = `https://blogger-app-backend.vercel.app/api/blogs?search_q=${searchInput}`
       const options = {
           method: 'GET',
           headers: {
