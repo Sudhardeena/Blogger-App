@@ -6,7 +6,7 @@ import { authenticateToken } from "../controllers/authenticateToken.js";
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, '../client/public/uploads/users'); // Directory where files will be stored
+    cb(null, 'https://blogger-app-five.vercel.app/public/uploads/users'); // Directory where files will be stored
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + path.extname(file.originalname)); // Unique filename
