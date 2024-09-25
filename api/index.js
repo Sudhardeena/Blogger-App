@@ -72,7 +72,7 @@ const getContentType = (filename) => {
     case '.svg':
       return 'image/svg+xml';
     case '.jfif':
-      return 'image/jpeg'; // Corrected to image/jpeg
+      return 'image/jfif'; 
     case '.avif':
       return 'image/avif';
     default:
