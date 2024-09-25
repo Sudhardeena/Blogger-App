@@ -19,7 +19,7 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization'], // Include headers you expect
 }));
 
-// Enabling preflight requests for all routes
+// Enabling preflight requests for all routes 
 app.options('*', cors());
 
 
