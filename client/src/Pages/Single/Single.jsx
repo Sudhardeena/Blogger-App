@@ -182,10 +182,10 @@ const Single = () => {
         :
         <>
         <div className='blog-content'>
-        <img className='single-blog-page-image' src={`../uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
+        <img className='single-blog-page-image' src={`${backendUrl}/uploads/blogs/${blog.blogImg}`} alt='single-blog-page'/>
         <div className='single-blog-user-info-container'>
           <Link className='single-user-info-profile-info-link' to={`/profile/${blog.authorId}`}>
-            <img className='single-blog-user-img' src={blog.authorImg=='null' ? '../uploads/users/Unknown_person.jpg':`../uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
+            <img className='single-blog-user-img' src={blog.authorImg=='null' ? '../uploads/users/Unknown_person.jpg':`${backendUrl}/uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
             <div className='single-blog-user-ingo'>
               <span className='single-blog-user-name'>{blog.authorname}</span>
               <p className='single-blog-posted-time'>{moment(blog.blogDate).fromNow()}</p>

@@ -2,8 +2,11 @@ import React from 'react'
 import './BlogItem.css'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+import { UserContext } from '../../context/userContext'
+import { useContext } from 'react'
 
 const BlogItem = (props) => {
+    const {backendUrl} = useContext(UserContext)
     const {blogDetails} = props
     // console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
@@ -12,7 +15,7 @@ const BlogItem = (props) => {
     <Link to={`/blogs/${blogId}`}>
         <li className='blog-list-item'>
         <div className='blog-img-div'>
-        <img className='blog-image' src={`../uploads/blogs/${blogImg}`} alt={title}/>
+        <img className='blog-image' src={`${backendUrl}/uploads/blogs/${blogImg}`} alt={title}/>
         </div>
         <div className='blog-info-container'>
             <h1 className='blog-title'>{title}</h1>
