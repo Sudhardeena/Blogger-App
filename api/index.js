@@ -35,7 +35,6 @@ const intializeDBAndServer = async () => {
       filename: path.join(__dirname, 'BlogDatabase.db'),
       driver: sqlite3.Database,
     })
-    db.run('PRAGMA foreign_keys=ON;')
     app.listen(port, () => {
       console.log(`server running at http://localhost:${port}`)
     })
@@ -50,7 +49,7 @@ intializeDBAndServer()
 
 
 app.get('/',(req,res)=>{
-  res.send("Hai")
+  res.json("Hai")
 })
 
 app.use("/api/auth",authRoutes)
