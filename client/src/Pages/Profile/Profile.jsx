@@ -181,7 +181,7 @@ const Profile = () => {
         
         <div className='user-profile-details-section'>
         <div className='single-blog-user-info-container'>
-          <img className='single-blog-user-img' src={`../uploads/users/${profileImage}`} alt='single-blog-user-img'/>
+          <img className='single-blog-user-img' src={`${backendUrl}/uploads/users/${profileImage}`} alt='single-blog-user-img'/>
           <div className='single-blog-user-ingo'>
             <span className='profile-user-name'>{username}</span>
           </div>
