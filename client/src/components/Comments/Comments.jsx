@@ -14,7 +14,7 @@ const Comments = (props) => {
     <ul className='comments-list'>
       {
         commentslist.length>0 ? 
-        commentslist.map(each=><CommentItem key={each.commentId}  commentDetails={each}/>)
+        commentslist.map(each=><CommentItem key={each.commentID}  commentDetails={each}/>)
     : <p className='no-comments-text'>no comments yet</p>}
     </ul>
   )

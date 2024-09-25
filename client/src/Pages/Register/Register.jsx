@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import './Register.css'
 import { json, Link, useNavigate } from 'react-router-dom'
-
+import { UserContext } from '../../context/userContext'
 
 const Register = () => {
+  const {backendUrl} = useContext(UserContext)
   const [inputs,setInputs] = useState({
     username: '',
     email:'',
@@ -36,7 +37,7 @@ const Register = () => {
     }
     // formDataToSend.append('profileImage', inputs.profileImage);
 
-    const url = "https://blogger-app-backend.vercel.app/api/auth/register"
+    const url = `${backendUrl}/api/auth/register`
     const options = {
       method: "POST",
       body: formDataToSend,
@@ -44,7 +45,7 @@ const Register = () => {
     // console.log(options)
     const response = await fetch(url,options)
     const data = await response.json()
-    // console.log(data)
+    console.log(data)
     if(response.ok){
       navigate('/login',{replace:true})
     }else{

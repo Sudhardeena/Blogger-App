@@ -8,7 +8,7 @@ import './Write.css'
 import { useLocation, useNavigate,  Navigate } from 'react-router-dom';
 
 const Write = () => {
-  const {user,setUser} = useContext(UserContext)
+  const {user,setUser,backendUrl} = useContext(UserContext)
   const navigate = useNavigate()
 
   if(user==null){
@@ -50,7 +50,7 @@ const Write = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = state ? `https://blogger-app-backend.vercel.app/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
+        const url = state ? `${backendUrl}/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
         const options = {
           headers: {
           Authorization: `Bearer ${jwtToken}`,

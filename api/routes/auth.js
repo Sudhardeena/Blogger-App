@@ -7,7 +7,7 @@ import { login, logout, register } from "../controllers/auth.js";
 // Configure multer for file uploads
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-      cb(null, 'https://blogger-app-five.vercel.app/public/uploads/users'); // Directory where files will be stored
+      cb(null, '../client/public/uploads/users'); // Directory where files will be stored
     },
     filename: (req, file, cb) => {
       cb(null, Date.now() + path.extname(file.originalname)); // Unique filename

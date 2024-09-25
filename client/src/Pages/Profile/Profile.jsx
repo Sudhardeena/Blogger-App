@@ -60,7 +60,7 @@ import { BsThreeDots } from 'react-icons/bs'
 
 const Profile = () => {
   const {userId} = useParams()
-  const {user,setUser} = useContext(UserContext)
+  const {user,setUser,backendUrl} = useContext(UserContext)
   const navigate = useNavigate()
   const [userDetailsAndBlogs,setDetailsAndBlog] = useState({})
   const [isLoading,setApiStatus] = useState(false)
@@ -92,7 +92,7 @@ const Profile = () => {
   const fetchData = async () =>{
     try {
       setApiStatus(true)
-      const url = `https://blogger-app-backend.vercel.app/api/users/blogs/${userId}`
+      const url = `${backendUrl}/api/users/blogs/${userId}`
       const options = {
           method: 'GET',
           headers: {
@@ -138,7 +138,7 @@ const Profile = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = `https://blogger-app-backend.vercel.app/api/users/${userId}` 
+        const url = `${backendUrl}/api/users/${userId}` 
         const options = {
           headers: {
           Authorization: `Bearer ${jwtToken}`,

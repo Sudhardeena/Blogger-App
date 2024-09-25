@@ -1,10 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import BlogList from '../../components/BlogList/BlogList';
 import {BsSearch} from 'react-icons/bs'
 import { BsThreeDots } from 'react-icons/bs'
 import './Home.css'
-
+import { UserContext } from '../../context/userContext';
 
 
 // src/data/blogList.js
@@ -61,6 +61,8 @@ import './Home.css'
 // ];
 
 const Home = () => {
+  const {backendUrl} = useContext(UserContext)
+  // console.log(backendUrl)
   const [blogs,setBlogs] = useState([])
   const [searchInput,setSearchInput] = useState('')
   const [isLoading,setApiStatus] = useState(false)
@@ -77,7 +79,7 @@ const Home = () => {
 
   const fetchData = async () =>{
     setApiStatus(true)
-      const url = `https://blogger-app-backend.vercel.app/api/blogs?search_q=${searchInput}`
+      const url = `${backendUrl}/api/blogs?search_q=${searchInput}`
       const options = {
           method: 'GET', 
           headers: {

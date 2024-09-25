@@ -68,13 +68,13 @@ const Single = () => {
 
   // console.log(blog)
 
-  const {user,setUser} = useContext(UserContext)
+  const {user,setUser,backendUrl} = useContext(UserContext)
   
   const navigate = useNavigate()
 
   const fetchData = async () =>{
     setApiStatus(true)
-    const url = `https://blogger-app-backend.vercel.app/api/blogs/${blogId}`
+    const url = `${backendUrl}/api/blogs/${blogId}`
       const options = {
           method: 'GET',
           headers: {
@@ -99,7 +99,7 @@ const Single = () => {
     const {userInformation,jwtToken} = user
     const {userId} = userInformation
     
-    const url = `https://blogger-app-backend.vercel.app/api/blogs/${blogId}`
+    const url = `${backendUrl}/api/blogs/${blogId}`
       const options = {
           method: 'DELETE',
           headers: {
@@ -140,7 +140,7 @@ const Single = () => {
       blog_id: blogId
     }
     
-      const url = "https://blogger-app-backend.vercel.app/api/blogs/comments"
+      const url = `${backendUrl}/api/blogs/comments`
       const options = {
         method : "POST",
         headers: {

@@ -22,14 +22,14 @@ const Login = () => {
 
   const navigate = useNavigate()
 
-  const {setUser} = useContext(UserContext)
+  const {setUser,backendUrl} = useContext(UserContext)
 
   const handleSubmit = async e =>{
     e.preventDefault()
     
     
 
-    const url = "https://blogger-app-backend.vercel.app/api/auth/login"
+    const url = `${backendUrl}/api/auth/login`
     const options = {
       method: "POST",
       headers: {
