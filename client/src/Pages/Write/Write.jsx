@@ -50,7 +50,7 @@ const Write = () => {
         }
         // formDataToSend.append('profileImage', inputs.profileImage);
 
-        const url = state ? `${backendUrl}/api/blogs/${state.blogId}` : "http://localhost:8000/api/blogs"
+        const url = state ? `${backendUrl}/api/blogs/${state.blogId}` : `${backendUrl}/api/blogs`
         const options = {
           headers: {
           Authorization: `Bearer ${jwtToken}`,
