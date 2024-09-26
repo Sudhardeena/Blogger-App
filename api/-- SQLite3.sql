@@ -33,9 +33,13 @@ drop TABLE posts;
 
 SELECT * FROM blogs
 
-DELETE from blogs where blog_id=1;
+DELETE from blogs where user_id!=7;
+
+DELETE FROM users where user_id!=7
 
 SELECT * FROM users;
+
+UPDATE users SET email="rakesh@gmail.com" where user_id=9
 
 CREATE TABLE comments (
     comment_id INTEGER PRIMARY KEY AUTOINCREMENT,
