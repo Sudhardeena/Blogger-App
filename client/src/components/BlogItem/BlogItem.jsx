@@ -2,6 +2,8 @@ import React from 'react'
 import './BlogItem.css'
 import { Link } from 'react-router-dom'
 import moment from 'moment'
+// import moment from 'moment-timezone';
+
 import { UserContext } from '../../context/userContext'
 import { useContext } from 'react'
 
@@ -11,6 +13,10 @@ const BlogItem = (props) => {
     // console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
     // console.log(blogImg)
+    const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    // const blogDateLocal = moment.utc(blogDate).tz(userTimezone).fromNow();
+    // console.log(userTimezone,blogDate,blogDateLocal) 
+
   return (
     <Link to={`/blogs/${blogId}`}>
         <li className='blog-list-item'>

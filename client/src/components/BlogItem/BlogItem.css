@@ -24,12 +24,14 @@
     display: flex;
     flex-direction: column;
     font-family: roboto;
-    padding: 15px;
+    padding-left: 10px;
 }
 
 .blog-title{
-    font-size: 25px;
+    font-size: 1rem;
     color: #304766;
+    margin: 0;
+    padding: 0;
 }
 .blog-user-name{
     color: teal;
@@ -40,13 +42,15 @@
     
     font-size: 15px;
     color: gray;
-    margin: 5px 0 20px 10px;
+    margin: 5px 0 20px 5px;
 }
 
 .bolg-desc{
     font-size: 18px;
     color: #000000;
     line-height: 1.5;
+    margin: 0;
+    padding: 0;
 }
 
 @media screen and (min-width:500px) {

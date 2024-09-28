@@ -34,7 +34,7 @@ export const getBlog = async (req,res) => {
     // console.log(blogId)
     // res.json(blogId)
     const getSingleBlogQuery = `
-        select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date,A.profile_image,A.content,blogs.user_id
+        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date,A.profile_image,A.content,blogs.user_id
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
         WHERE blogs.blog_id = ?;
     `
@@ -79,18 +79,18 @@ export const getBlog = async (req,res) => {
 
 
 export const addBlog = async (req, res) => {
-    const { title, description, user_id, content } = req.body;
+    const { title, description, user_id, content,blog_date } = req.body;
     // const content = req.body.content; // No need to modify content here
     const blog_img = req.file ? req.file.filename : null;
 
     // Use parameterized queries to prevent SQL injection
     const addBlogQuery = `
-        INSERT INTO blogs (title, description, content, blog_img, user_id)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT INTO blogs (title, description, content, blog_img, user_id, blog_date)
+        VALUES (?, ?, ?, ?, ?, ?)
     `;
 
     try {
-        const dbResponse = await db.run(addBlogQuery, [title, description, content, blog_img, user_id]);
+        const dbResponse = await db.run(addBlogQuery, [title, description, content, blog_img, user_id, blog_date]);
         const blogId = dbResponse.lastID; // Use lastID to get the ID of the inserted row
         res.status(200).json({ blogId: blogId });
     } catch (error) {

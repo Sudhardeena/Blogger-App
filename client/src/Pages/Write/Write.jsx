@@ -38,13 +38,15 @@ const Write = () => {
       // console.log(title)
         const {userInformation,jwtToken} = user
         const {userId} = userInformation
-      
+        const currentDate = new Date().toISOString();
+
 
         const formDataToSend = new FormData();
         formDataToSend.append('title', title);
         formDataToSend.append('description', description);
         formDataToSend.append('content', content);
         formDataToSend.append('user_id',userId);
+        formDataToSend.append('blog_date',currentDate)
         if (blogImg) {
           formDataToSend.append('blog_img', blogImg);
         }
