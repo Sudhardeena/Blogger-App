@@ -27,8 +27,6 @@ const Write = () => {
   
 
   const handleSubmit = async () =>{
-    const currentDate = new Date().toISOString();
-      console.log(currentDate)
     
     if(title!=='' && description!=='' && content!==''){
       if(!state){
@@ -40,7 +38,6 @@ const Write = () => {
         const {userInformation,jwtToken} = user
         const {userId} = userInformation
         const currentDate = new Date().toISOString();
-
 
         const formDataToSend = new FormData();
         formDataToSend.append('title', title);
@@ -106,7 +103,6 @@ const Write = () => {
             <input className='editor-input-elements' required type='file' name='' id='blogImgInput' onChange={e=>setblogImg(e.target.files[0])}/>
             
             <div className='menu-btns'>
-              <button className='each-menu-btn'>Save as a draft</button>
               <button className='each-menu-btn' onClick={handleSubmit}>{state ? 'Update' : "Publish"}</button>
             </div>
           </div>

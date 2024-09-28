@@ -8,7 +8,7 @@ export const getUserBlogs = async (req,res) => {
         where user_id = ${userId}
     `
     const getBlogsQuery = `
-        select A.blog_id,A.title,A.description,A.blog_img,A.username,datetime(A.blog_date, 'localtime') AS blog_date
+        select A.blog_id,A.title,A.description,A.blog_img,A.username,A.blog_date
         from (blogs inner join users on users.user_id = blogs.user_id) AS A
         WHERE A.user_id = ?
         ORDER BY A.blog_date DESC;

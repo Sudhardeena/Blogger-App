@@ -54,12 +54,16 @@
     border: none !important;
 }
 .menu{
-    width: 25%;
+    min-width: 25%;
+    max-width: 200px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
     /* padding-top: 20px; */
     flex-shrink: 0;
+}
+.publish-title{
+    margin: 0;
 }
 
 @media  screen and (max-width: 600px) {

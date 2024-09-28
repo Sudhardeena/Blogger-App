@@ -6,7 +6,8 @@ import Comments from '../../components/Comments/Comments'
 import moduleName from 'module'
 import { UserContext } from '../../context/userContext'
 import DOMPurify from "dompurify";
-import moment from 'moment'
+// import moment from 'moment'
+import moment from 'moment-timezone';
 import { BsThreeDots } from 'react-icons/bs'
 
 // const commentsList = [
@@ -134,10 +135,12 @@ const Single = () => {
     }
     const {userInformation,jwtToken} = user
     const {userId} = userInformation
+    const currentDate = new Date().toISOString();
     const addCommentDetails = {
       comment: commentInput,
       user_id: userId,
-      blog_id: blogId
+      blog_id: blogId,
+      comment_date: currentDate,
     }
     
       const url = `${backendUrl}/api/blogs/comments`
@@ -166,6 +169,10 @@ const Single = () => {
     
   }
 
+  const {blogDate} = blog
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const blogDateLocal = moment.utc(blogDate).tz(userTimezone).fromNow();
+
 
 
   return (
@@ -188,7 +195,7 @@ const Single = () => {
             <img className='single-blog-user-img' src={blog.authorImg=='null' ? '../uploads/users/Unknown_person.jpg':`${backendUrl}/uploads/users/${blog.authorImg}`} alt='single-blog-user-img'/>
             <div className='single-blog-user-ingo'>
               <span className='single-blog-user-name'>{blog.authorname}</span>
-              <p className='single-blog-posted-time'>{moment(blog.blogDate).fromNow()}</p>
+              <p className='single-blog-posted-time'>{blogDateLocal}</p>
             </div>
           </Link>
           {

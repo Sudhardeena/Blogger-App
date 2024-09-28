@@ -148,19 +148,19 @@ export const updateBlog =async (req,res) => {
 }
 
 export const addComment = async (req,res)=>{
-    const {comment,user_id,blog_id} = req.body
+    const {comment,user_id,blog_id,comment_date} = req.body
     
     const addCommentQuery = `
-        INSERT INTO comments (comment, blog_id, user_id)
-        VALUES (?, ?, ?)
+        INSERT INTO comments (comment, blog_id, user_id, comment_date)
+        VALUES (?, ?, ?, ?)
     `;
     const getCommentsQuery = `
-        SELECT A.comment,datetime(A.comment_date, 'localtime') AS comment_date,A.username,A.profile_image,A.user_id,A.comment_id FROM (comments INNER join users on comments.user_id = users.user_id) as A
+        SELECT A.comment,A.comment_date,A.username,A.profile_image,A.user_id,A.comment_id FROM (comments INNER join users on comments.user_id = users.user_id) as A
         WHERE A.blog_id = ?
         ORDER BY A.comment_date DESC;
     `
     try {
-        const addCommentDbResponse = await db.run(addCommentQuery,[comment,blog_id,user_id])
+        const addCommentDbResponse = await db.run(addCommentQuery,[comment,blog_id,user_id,comment_date])
         const updatedCommentsList = await db.all(getCommentsQuery,[blog_id])
         const modifiedCommentList = updatedCommentsList.map(each=>({
             comment:each.comment,
