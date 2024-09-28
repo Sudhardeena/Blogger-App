@@ -27,7 +27,8 @@ const Write = () => {
   
 
   const handleSubmit = async () =>{
-
+    const currentDate = new Date().toISOString();
+      console.log(currentDate)
     
     if(title!=='' && description!=='' && content!==''){
       if(!state){

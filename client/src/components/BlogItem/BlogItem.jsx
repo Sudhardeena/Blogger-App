@@ -12,10 +12,9 @@ const BlogItem = (props) => {
     const {blogDetails} = props
     // console.log(blogDetails)
     const {blogDate,desc,blogId,blogImg,title,username} = blogDetails
-    // console.log(blogImg)
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const blogDateLocal = moment.utc(blogDate).tz(userTimezone).fromNow();
-    // console.log(userTimezone,blogDate,blogDateLocal) 
+    console.log(userTimezone,blogDate,blogDateLocal) 
 
   return (
     <Link to={`/blogs/${blogId}`}>
