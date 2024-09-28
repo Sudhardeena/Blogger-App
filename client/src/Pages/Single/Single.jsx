@@ -178,6 +178,7 @@ const Single = () => {
   return (
     <div className='single-post-page-container'>
       <Navbar/>
+      <div className='blog-page-body'>
       {isLoading ?
         <BsThreeDots
         className="loader"
@@ -232,6 +233,7 @@ const Single = () => {
       }
         </>
       }
+      </div>
       
     </div>
   )
