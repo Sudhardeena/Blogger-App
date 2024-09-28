@@ -4,8 +4,8 @@ export  const UserContext = createContext()
 
 const UserContextProvider = (props) =>{
     const [user,setUser] = useState(null) 
-    // const backendUrl = 'https://blogger-app-backend-haxv.onrender.com'
-    const backendUrl = 'http://localhost:8000'
+    const backendUrl = 'https://blogger-app-backend-haxv.onrender.com'
+    // const backendUrl = 'http://localhost:8000'
     // console.log(user)
 
     return (
