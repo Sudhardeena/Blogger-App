@@ -4,8 +4,8 @@ React, Node.js) stack. The application allows users to sign up, log in, view, po
 comment on blogs. Additionally, users can be able to view other users' profiles and blogs.
 
 Project hosted:
-  Frontend(React) in Vercel platform: 
-  Backend(Node.js,Sqlite) in Render platfrom: 
+Frontend(React) in Vercel platform: 
+Backend(Node.js,Sqlite) in Render platfrom: 
 
 UI Components:
   1. Home Page:
