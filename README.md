@@ -4,8 +4,8 @@ Project Overview:
 THE PROJECT VIDEO LINK: https://www.loom.com/share/d4ff4eb567c246e9b46aa2f52697edd1?sid=6674b63a-092c-4859-8ea6-ba8e2477780d
 
 Project hosted:  
-Frontend(React) in Vercel platform:    
-Backend(Node.js,Sqlite) in Render platfrom: 
+Frontend(React) in Vercel platform: https://blogger-app-five.vercel.app
+Backend(Node.js,Sqlite) in Render platfrom: https://blogger-app-backend-haxv.onrender.com
 
 UI Components:    
   1. Home Page:    
