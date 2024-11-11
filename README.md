@@ -1,6 +1,8 @@
 Project Overview:    
        Developing a fully functional blog application using the MERN (SQLite, Express.js, React, Node.js) stack. The application allows users to sign up, log in, view, post, edit, and comment on blogs. Additionally, users can be able to view other users' profiles and blogs.
 
+THE PROJECT VIDEO LINK: https://www.loom.com/share/d4ff4eb567c246e9b46aa2f52697edd1?sid=6674b63a-092c-4859-8ea6-ba8e2477780d
+
 Project hosted:  
 Frontend(React) in Vercel platform:    
 Backend(Node.js,Sqlite) in Render platfrom: 
