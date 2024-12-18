@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from '../../components/Navbar/Navbar'
 import BlogList from '../../components/BlogList/BlogList';
 import {BsSearch} from 'react-icons/bs'
