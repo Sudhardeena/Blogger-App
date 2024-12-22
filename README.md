@@ -23,7 +23,7 @@ docker compose watch
 ```
 - If you like to use docker desktop GUI
   - pull the Images for both frontend and backend by searching "sudhardeena/blogger-app-web" and "sudhardeena/blogger-app-api" on docker hub.
-  - First run the blogger-app-api image for creating containers with optional settings port : 8000,1) host path : "your absolute path/api/blogDatabase.db", container path: "/app/blogDatabse.db" 2) host path : "your absolute path/api/uploads", container path: "/app/uploads".
+  - First run the blogger-app-api image for creating containers with optional settings port : 8000,1) host path : "your absolute path/api/BlogDatabase.db", container path: "/app/BlogDatabase.db" 2) host path : "your absolute path/api/uploads", container path: "/app/uploads".
   - Then run blogger-app-web, with optional setting Port: 5173
 
 ### UI Components:
